@@ -1,29 +1,27 @@
+// 评论数据库
 const sequelize = require("./db");
 const { DataTypes } = require("sequelize");//使用类型
-// 评论
 module.exports = sequelize.define(
-    "Comment",// 表名
+    "comment",// 表名
     {
+        articleId: { // 被评论的文章
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         content: { // 评论内容
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        parent: {
+        parent: { //被评论人
             type: DataTypes.INTEGER,
             allowNull: false,
         },
         author: { // 评论者
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
-        },
-        email: { // 评论者的邮箱
-            type: DataTypes.STRING,
-            allowNull: true,
         },
     },
     {
-        createdAt: true,
-        updatedAt: true,
         paranoid: true,
     }
 );

@@ -1,15 +1,11 @@
+// 文章数据库
 const sequelize = require("./db");
 const { DataTypes } = require("sequelize");//使用类型
-// 文章
 module.exports = sequelize.define(
-    "Article",// 表名
+    "article",// 表名
     {
         title: {// 标题
             type: DataTypes.STRING(128),
-            allowNull: false,
-        },
-        author: {// 作者
-            type: DataTypes.STRING,
             allowNull: false,
         },
         content: {// 内容
@@ -22,12 +18,14 @@ module.exports = sequelize.define(
         },
         tag: { // 标签
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        }
     },
     {
-        createdAt: true,
-        updatedAt: true,
         paranoid: true,
     }
 );
