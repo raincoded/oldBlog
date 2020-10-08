@@ -88,17 +88,17 @@
             v-for="article in hotArticle.rows"
             :key="article.id"
           >
-            <a
+            <!-- <a
               :to="{name:'Content',params:{id: article.id}}"
               @click="clickHandle(article.id)"
               class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
               >{{ article.title }}{{ article.id }}</a
-            >
-            <!-- <a
-              :to="{name:'Content',params: { id: article.id }}"
+            > -->
+            <a
+              :to="{name:'Content',params:{id: article.id}}"
               class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
               >{{ article.title }}{{ article.id }}</a
-            > -->
+            >
           </li>
         </ul>
       </div>
@@ -150,16 +150,14 @@ export default {
       this.SuiBiIndex = index;
     },
     clickHandle(id) {
-      // console.log(this.$route.path,`/content/${id}`);
+      console.log(this.$route.path);
       if (this.$store.state.articleId !== id) {
-        // console.log("改变", id);
+          console.log("改变", id);
         this.$store.commit("changeStateId", id);
       }
-      if (this.$route.path != `/content/${id}`) {
-        // console.log("非本页");
-        this.$router.push({ name: "Content",params:{
-          id:id
-        } });
+      if (this.$route.path !== "/content") {
+        console.log('非本页');
+        this.$router.push({ name: "Content" });
       }
     },
   },
@@ -188,14 +186,17 @@ export default {
         order: "DESC",
       })
       .then((req) => {
-        this.hotArticle = req;
-        this.$store.commit("changeStateId", req.rows[0].id); // 默认是播放量最高的
+        if (req.data.code == 0) {
+          this.hotArticle = req.data.data;
+          this.$store.commit("changeStateId", req.data.data.rows[0].id); // 默认是播放量最高的
+        }
       });
     // 获取文章，阅读，评论数量
     indexAjax.getArticleMes().then((req) => {
-      this.articleMes = req;
+      this.articleMes = req.data.data;
     });
   },
+  
 };
 </script>
 <style lang="scss" scoped>

@@ -38,7 +38,7 @@ exports.updatePraise = async function (obj) {
     }
     const queryResult = await exports.getPraiseAll(newObj);
     if (queryResult.count > 0) {
-        console.log('你点过赞');
+        // console.log('你点过赞');
         const result = await Praise.destroy({
             where: {
                 ...newObj
@@ -51,14 +51,14 @@ exports.updatePraise = async function (obj) {
 }
 
 /**
- * 获取所有点赞
+ * 分页获取点赞
  * @param {'Object'} 
  * @param {*} page  int
  * @param {*} limit  int
  * @param {*} articleId  int
  * @param {*} userId int
  */
-exports.getPraiseAll = async function (obj) {
+exports.getPraiseByPage = async function (obj) {
     let { page = 1, limit = 10, articleId, userId } = obj;
     const where = {};
     // 验证数据,返回undefined表示通过
@@ -88,7 +88,7 @@ exports.getPraiseAll = async function (obj) {
     }
 
     if (articleId) {
-        console.log(articleId, userId);
+        // console.log(articleId, userId);
         articleId = +articleId;
         const testResult = validate({ articleId }, {
             articleId: {
@@ -116,12 +116,19 @@ exports.getPraiseAll = async function (obj) {
         throw new Error('文章或用户id缺少！')
     }
     const result = await Praise.findAndCountAll({
+        attributes: { exclude: ['updatedAt', 'deletedAt'] },
         where: {
             ...where
         },
         offset: (page - 1) * limit,
         limit: +limit,
     })
+    return JSON.parse(JSON.stringify(result))
+}
+
+// 获取所有点赞
+exports.getPraiseAll = async function () {
+    const result = await Praise.findAll({ attributes: { exclude: ['deletedAt', 'createdAt', 'updatedAt'] } })
     return JSON.parse(JSON.stringify(result))
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        Login
+        Message
     </div>
 </template>
 <script>

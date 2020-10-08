@@ -5,9 +5,9 @@ const xss = require('xss');
 const Service = require('../../services/init');
 const getMsg = require("../getSendResult"); // 辅助函数
 
-// 获取所有文章
+// 分页获取所有文章
 router.get('/', getMsg.asyncHandler(async (req, res) => {
-    const result = await Service.ArticleService.getArticleAll(req.query);
+    const result = await Service.ArticleService.getArticleByPage(req.query);
     if (result.count > 0) {
         return {
             msg: '获取成功！',
@@ -17,9 +17,24 @@ router.get('/', getMsg.asyncHandler(async (req, res) => {
     throw new Error('搜索为空！')
 }))
 
+// 获取所有文章
+router.get('/all', getMsg.asyncHandler(async (req, res) => {
+    const result = await Service.ArticleService.getArticleAll();
+    if (result) {
+        return {
+            msg: '获取成功！',
+            data: result
+        }
+    } else {
+        throw new Error('没有相关标签！')
+    }
+}))
+
 // 根据id获取对应的文章
 router.get('/:id', getMsg.asyncHandler(async (req, res) => {
+    console.log('object');
     const result = await Service.ArticleService.getArticleById(req.params.id);
+    console.log('文章',result);
     if (result) {
         return {
             msg: '获取成功！',
@@ -52,21 +67,6 @@ router.put('/:id', getMsg.asyncHandler(async (req, res) => {
     throw new Error('增加失败！')
 }))
 
-// 修改标签
-router.put('/', getMsg.asyncHandler(async (req, res) => {
-    const result = await Service.ArticleService.changeArticleTag(req.body)
-    if (result) {
-        return {
-            msg: '修改成功!',
-            data: result
-        }
-    }
-    throw new Error('修改失败！')
-}))
-
-
-
-
 /**
  * 删除文章
  * @param {'int'} id 文章id
@@ -85,12 +85,17 @@ router.delete('/', getMsg.asyncHandler(async (req, res) => {
 
 module.exports = router;
 
-
-
-
-
-
-
+// // 修改标签
+// router.put('/', getMsg.asyncHandler(async (req, res) => {
+//     const result = await Service.ArticleService.changeArticleTag(req.body)
+//     if (result) {
+//         return {
+//             msg: '修改成功!',
+//             data: result
+//         }
+//     }
+//     throw new Error('修改失败！')
+// }))
 
 // 获取一堆文章
 // router.get('/', async (req, res) => {
@@ -103,7 +108,7 @@ module.exports = router;
 //     if (limit) {
 //         obj.limit = +limit;
 //     }
-//     const data = await Service.ArticleService.getArticleAll(obj);
+//     const data = await Service.ArticleService.getArticleByPage(obj);
 //     res.send({
 //         code: 200,
 //         msg: '获取成功！',

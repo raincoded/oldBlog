@@ -5,7 +5,7 @@ module.exports = function (obj, ...props) {
     const newObj = {};
     for (const key in obj) {
         if (props.includes(key)) {
-            newObj[key] = obj[key]
+            newObj[key] = obj[key];
         }
     }
     return newObj

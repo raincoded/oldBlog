@@ -7,11 +7,15 @@ const getMsg = require("../getSendResult"); // 辅助函数
 
 // 获取文章或作者的所有点赞
 router.get('/', getMsg.asyncHandler(async (req, res) => {
-    const result = await Service.PraiseService.getPraiseAll(req.query)
-    return {
-        msg: '获取成功！',
-        data: result
+    console.log(req.query)
+    const result = await Service.PraiseService.getPraiseByPage(req.query)
+    if(result.count>0){
+        return {
+            msg: '获取成功！',
+            data: result
+        }
     }
+    throw new Error('未查询到！')
 }))
 
 /**
@@ -34,18 +38,16 @@ router.put('/', getMsg.asyncHandler(async (req, res) => {
     }
 }))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 获取所有点赞
+router.get('/all', getMsg.asyncHandler(async (req, res) => {
+    const result = await Service.PraiseService.getPraiseAll();
+    if (result) {
+        return {
+            msg: '获取成功！',
+            data: result
+        }
+    } else {
+        throw new Error('没有相关标签！')
+    }
+}))
 module.exports = router;

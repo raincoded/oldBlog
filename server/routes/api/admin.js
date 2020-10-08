@@ -6,7 +6,7 @@ const getMsg = require("../getSendResult"); // 辅助函数
 
 // 获取所有用户
 router.get('/', getMsg.asyncHandler(async (req, res) => {
-    const result = await Service.UserService.getUserAll(req.query);
+    const result = await Service.UserService.getUserByPage(req.query);
     if (result.count > 0) {
         return {
             msg: '获取成功!',
@@ -52,11 +52,6 @@ router.put('/', getMsg.asyncHandler(async (req, res) => {
         throw new Error('请输入要更改的用户id！');
     }
     if (!power) {
-        throw new Error('请输入要更改的权限！');
-    } else if (power === 1) {
-        throw new Error('不能修改！');
-    }
-    if (!identity) {
         throw new Error('请输入您的身份！');
     }
     if (identity === id) {
@@ -111,7 +106,7 @@ module.exports = router;
 //     const where = {};
 //     limit && (where.limit = limit);
 //     page && (where.page = page);
-//     const data = await Service.UserService.getUserAll(where)
+//     const data = await Service.UserService.getUserByPage(where)
 //     res.send({
 //         code: 200,
 //         msg: '获取成功!',

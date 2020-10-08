@@ -1,10 +1,56 @@
 <template>
   <div id="app">
-    <router-view />
+    <!-- 首页 -->
+    <div class="box">
+      <!-- header -->
+      <header-ind />
+      <!-- 内容区 -->
+      <div class="container">
+        <div class="row mx-0 py-3">
+          <div class="col-8 pl-0">
+            <keep-alive>
+              <router-view />
+            </keep-alive>
+          </div>
+          <div class="col-4">
+            <right-contain />
+          </div>
+        </div>
+      </div>
+      <!-- footer -->
+      <footer class="text-white">
+        鲁公网安备 12345678901234号 鲁ICP备12345678号 Powered By:Z-Blog Theme
+        By:优美主题 丨免责声明
+      </footer>
+    </div>
   </div>
 </template>
 <script>
-export default {};
+import headerInd from "@/components/Header.vue";
+import RightContain from "@/components/RightContain.vue";
+export default {
+  components: {
+    RightContain,
+    headerInd,
+  },
+  created() {
+    //在页面加载时读取sessionStorage里的状态信息
+    if (sessionStorage.getItem("store")) {
+      this.$store.replaceState(
+        Object.assign(
+          {},
+          this.$store.state,
+          JSON.parse(sessionStorage.getItem("store"))
+        )
+      );
+    }
+
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("store", JSON.stringify(this.$store.state));
+    });
+  },
+};
 </script>
 <style lang="scss">
 #app {
@@ -17,9 +63,19 @@ export default {};
 .isGooded {
   color: #f40;
 }
-.commentAvatar {
-  // height: 3rem;
-  // width: 3rem;
+footer {
+  height: 3rem;
+  background-color: #477aa3;
+  line-height: 3rem;
+  text-align: center;
+  font-size: 0.8rem;
 }
-</style>
+.box {
+  min-height: 100vh;
+  padding-top: 3rem;
+}
+.content {
+  min-height: calc(100vh - 6rem);
+}
 
+</style>

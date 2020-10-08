@@ -19,6 +19,7 @@ app.use(express.urlencoded({extended: true})); // extended表示是否使用新�
 app.use(express.json());
 // 处理静态资源
 app.use(express.static(staticRoot));
+// app.set('trust proxy', true);// 处理代理地址
 
 // 上传文本
 app.use("/upload/uploadTxt", require('./upload/uploadTxt'));
@@ -32,13 +33,14 @@ app.use("/api/admin", require('./api/admin'));
 app.use("/api/article", require('./api/article'));
 app.use("/api/comment", require('./api/comment'));
 app.use("/api/tag", require('./api/tag'));
-app.use("/api/pramise", require('./api/pramise'));
+app.use("/api/praise", require('./api/praise'));
+app.use("/api/message", require('./api/message'));
 
 // 错误中间件
 app.use(require('./errorMiddleware'))
 
 // 监听端口
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`server listen on ${port}`);
 });
 

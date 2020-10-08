@@ -1,10 +1,8 @@
 <template>
-    <div>
-        Login
-    </div>
+  <div>About</div>
 </template>
 <script>
 export default {
-    
-}
+ 
+};
 </script>

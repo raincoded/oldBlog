@@ -1,57 +1,49 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-    redirect:'index',
-    children: [
-      {
-      path: 'index',
-      name: 'Index',
-      component: () => import(/* webpackChunkName: "about" */ '../views/pages/Index.vue'),
+    redirect: {
+      name:'Index'
     },
-     {
-      path: 'content',
-      name: 'Content',
-      component: () => import(/* webpackChunkName: "about" */ '../views/pages/Content.vue'),
-    },
-    {
-      path: 'message',
-      name: 'Message',
-      component: () => import(/* webpackChunkName: "about" */ '../views/pages/Message.vue'),
-    }, {
-      path: '/about',
-      name: 'About',
-      component: () => import(/* webpackChunkName: "about" */ '../views/pages/About.vue')
-    },
-    ]
   },
   {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+    path: '/index',
+    name: 'Index',
+    component: () => import(/* webpackChunkName: "Index" */ '../views/Index.vue'),
   },
-
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
+    path: '/content/:id',
+    name: 'Content',
+    component: () => import(/* webpackChunkName: "Message" */ '../views/Content.vue'),
+  },
+  {
+    path: '/message',
+    name: 'Message',
+    component: () => import(/* webpackChunkName: "Message" */ '../views/Message.vue'),
+  }, {
+    path: '/about',
+    name: 'About',
+    component: () => import(/* webpackChunkName: "About" */ '../views/About.vue')
   },
   {
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "Login" */ '../views/Register.vue')
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
+  // mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

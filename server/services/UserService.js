@@ -19,6 +19,9 @@ function bat(str) {
 // 自定义规则验证
 // 验证name
 validate.validators.nameTest = async function (name) {
+    if (!name) {
+        return
+    }
     if (!(bat(name) >= 4)) {
         return "姓名不能低于4个字符"
     } else if (!(bat(name) <= 10)) {
@@ -28,26 +31,30 @@ validate.validators.nameTest = async function (name) {
     if (result.count > 0) {// 大于0说明name重复
         return "姓名重复"
     }
-    return
+
 }
 // 验证email
 validate.validators.eamilTest = async function (email) {
+    if (!email) {
+        return
+    }
     const result = await exports.getUserAll({ email });
     if (result.count > 0) {// 大于0说明email重复
         return "邮箱重复"
     }
-    return
+
 }
 
 /**
  * 添加用户
  * @param {'int'} obj 添加用户的信息
  * @param {'string'} name 用户的name
- * @param {'string'} name 用户的email
- * @param {'string'} name 用户的password
+ * @param {'string'} email 用户的email
+ * @param {'string'} password 用户的password
+ * @param {'int'} power 用户的权限，只能设置-2
  */
 exports.addUsers = async function (obj) {
-    const newObj = pick(obj, 'name', 'email', 'password');// 过滤需要的值
+    const newObj = pick(obj, 'name', 'email', 'password', 'power');// 过滤需要的值
 
     // 验证数据,返回undefined表示通过
     await validate.async(newObj, {
@@ -76,8 +83,9 @@ exports.addUsers = async function (obj) {
             },
         }
     })
-
-    newObj.power = -1; //初始权限为-1
+    if (newObj.power !== -2) {// -2表示游客,密码为123456
+        newObj.power = -1; //初始权限为-1
+    }
     newObj.password = md5(newObj.password); // 密码加密
     let result = await Users.create(newObj); // 创建数据
     return JSON.parse(JSON.stringify(result))
@@ -99,7 +107,7 @@ exports.getUserById = async function (id) {
 }
 
 /**
- * 获取所有用户
+ * 分页获取所有用户
  * @param {'object'} page   int
  * @param {*} page  int
  * @param {*} limit  int
@@ -196,10 +204,17 @@ exports.getUserAll = async function (obj) {
     // email && (where.email = email);
     // name && (where.name = { [Op.like]: `%${name}%` });
     const result = await Users.findAndCountAll({
+        attributes: { exclude: ['updatedAt','deletedAt'] },
         where,
         offset: (page - 1) * limit,
         limit: +limit,
     })
+    return JSON.parse(JSON.stringify(result))
+}
+
+// 获取所有用户
+exports.getUserAll = async function () {
+    const result = await Users.findAll()
     return JSON.parse(JSON.stringify(result))
 }
 
@@ -216,9 +231,7 @@ exports.updateUser = async function (obj) {
     // 过滤需要的值
     let { id, email, name, password, power } = pick(obj, 'id', 'email', 'name', 'password', 'power');
     const newObj = {};// 待确定有哪些修改参数
-
     // 验证数据，由于不确定都有，需单独验证
-
     if (id) {
         id = +id; // 转换成数字
         const testResult = validate({ id }, { id: { type: "integer" } });
@@ -285,6 +298,7 @@ exports.updateUser = async function (obj) {
     return await Users.update({
         ...newObj
     }, {
+        attributes: { exclude: ['updatedAt','deletedAt'] },
         where: {
             id,
         },

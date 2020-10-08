@@ -1,6 +1,6 @@
 <template>
     <div>
-        Login
+        index
     </div>
 </template>
 <script>

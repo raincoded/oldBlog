@@ -1,10 +1,10 @@
 const Article = require("./../../mysql/models/Article");
 const { Op } = require("sequelize"); // 用操作符是需要导入 Op
 const validate = require('validate.js'); // 数据验证
-const pick = require('./until/pick');
 const UserService = require('./UserService'); // 服务层server
 const TagService = require('./TagService'); // 服务层server
-
+const pick = require('./until/pick');
+const unique = require('./until/unique');
 const xss = require('xss');
 /**
  * 发布文章
@@ -43,15 +43,19 @@ exports.addArticle = async function (obj) {
         newObj.title = xss(newObj.title);
         newObj.content = xss(newObj.content);
         newObj.tag = xss(newObj.tag);
-        let result = await Article.create(newObj);
-        result = JSON.parse(JSON.stringify(result))
-        if (newObj.tag) {
-            const tags = newObj.tag.split(',');
-            const newTag = tags.slice(0, 3).join(',');
-            await TagService.addTags({
-                tag: newTag,
-                articleId: result.id
-            })
+        newObj.tag = newObj.tag.split(','); // 分割成数组
+        newObj.tag = unique(newObj.tag);// 去重
+        newObj.tag = tags.slice(0, 3);// 最多只能有3个标签
+
+        let result = await Article.create(newObj);// 添加文章
+        result = JSON.parse(JSON.stringify(result));
+        if (newObj.tag) { // 标签存在就添加标签
+            newObj.tag.forEach(async tag => { // 循环添加标签
+                await TagService.addTags({
+                    tag,
+                    articleId: result.id
+                })
+            });
         }
         return result
     } else {
@@ -90,35 +94,25 @@ exports.addViews = async function (id) {
 
 /**
  * 修改文章的标签
- * @param {'int'} id 
- * @param {'int'} tag 
- * 标签
+ * @param {'int'} id 文章id
+ * 标签id
  */
-exports.changeArticleTag = async function (obj) {
-    const newObj = pick(obj, 'id', 'tag');// 过滤需要的值
-    newObj.id = +newObj.id;
-    const testResult = validate(newObj, {
-        id: {
-            presence: true,
-            type: "integer"
-        },
-        tag: {
-            presence: {
-                allowEmpty: false, // 不允许为{},[],""," "
-            },
-            type: "string"
-        },
+exports.changeArticleTag = async function (id) {
+    id = +id;
+    let tags = await TagService.getTagsByPage({ articleId: id });//获取当前文章所有标签
+    let tagArr = []; // 汇总标签
+    // console.log('文章id', id);
+    tags.rows.forEach(row => {
+        tagArr.push(row.tag);
     });
-    if (testResult) {
-        throw testResult
-    }
-    const tags = newObj.tag.split(',');
-    const newTag = tags.slice(0, 3).join(',');
+    const tagStr = tagArr.join(',');
+    // 更新文章标签
     const result = await Article.update({
-        tag: newTag,
-    } ,{
+        tag: tagStr,
+    }, {
+        attributes: { exclude: ['deletedAt'] },
         where: {
-            id: newObj.id
+            id: id
         }
     })
     return result
@@ -146,14 +140,17 @@ exports.getArticleById = async function (id) {
 }
 
 /**
- * 获取所有文章
+ * 分页获取文章
  * @param {'object'}
  * @param {*} page int
  * @param {*} limit int
  * @param {*} id int
+ * @param {*} userId int
+ * @param {*} orderProp string 按谁排序
+ * @param {*} order string 升还是降
  */
-exports.getArticleAll = async function (obj) {
-    let { page = 1, limit = 10, id, title } = obj;
+exports.getArticleByPage = async function (obj) {
+    let { page = 1, limit = 10, id, title, userId, orderProp, order } = obj;
     const where = {};
     // 验证数据，由于不确定都有，需单独验证
     if (page) {
@@ -192,6 +189,19 @@ exports.getArticleAll = async function (obj) {
         }
         where.id = id;
     }
+    if (userId) {
+        userId = +userId; // 转换成数字
+        const testResult = validate({ userId }, {
+            userId: {
+                presence: true,
+                type: "integer"
+            }
+        });
+        if (testResult) {// 同步代码我们需手动抛出错误，异步会直接抛出
+            throw testResult
+        }
+        where.userId = userId;
+    }
     if (title) {
         const testResult = await validate({ title }, {
             title: {
@@ -206,15 +216,33 @@ exports.getArticleAll = async function (obj) {
         }
         where.title = { [Op.like]: `%${title}%` }
     }
+    const orderCondition = [];
+    if (orderProp) {
+        const arr = []
+        arr.push(orderProp);
+        order ? arr.push(order) : arr.push("ASC");
+        orderCondition.push(arr);
+    }
+    // console.log(where);
+    // console.log(orderCondition);
     const result = await Article.findAndCountAll({
+        attributes: { exclude: ['deletedAt'] },
         where: {
             ...where
         },
         offset: (page - 1) * limit,
         limit: +limit,
+        order: orderCondition
     })
     return JSON.parse(JSON.stringify(result))
 }
+
+// 获取所有文章
+exports.getArticleAll = async function () {
+    const result = await Article.findAll({ attributes: { exclude: ['deletedAt', 'updatedAt'] } });
+    return JSON.parse(JSON.stringify(result))
+}
+
 
 /**
  * 删除文章
