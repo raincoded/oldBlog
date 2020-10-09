@@ -189,7 +189,7 @@ export default {
       })
       .then((req) => {
         this.hotArticle = req;
-        this.$store.commit("changeStateId", req.rows[0].id); // 默认是播放量最高的
+        this.$store.commit("changeStateId", req.rows[0].id); // 默认是浏览量最高的
       });
     // 获取文章，阅读，评论数量
     indexAjax.getArticleMes().then((req) => {

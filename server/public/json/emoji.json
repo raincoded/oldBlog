@@ -1,4 +1,5 @@
-[{
+{
+    "data":[{
         "phrase": "[微笑]",
         "type": "face",
         "url": "http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/e3/2018new_weixioa02_org.png",
@@ -945,3 +946,4 @@
         "picid": ""
     }
 ]
+}

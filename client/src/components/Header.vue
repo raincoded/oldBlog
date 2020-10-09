@@ -19,7 +19,7 @@
             <li class="nav-item mx-1">
               <router-link
                 class="pr-2 pl-2 d-inline-block h-100"
-                :to="{ name: 'Content', params: { id: 27 } }"
+                :to="{ name: 'Content', params: { id: $store.state.articleId } }"
                 >内容</router-link
               >
             </li>
