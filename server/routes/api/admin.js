@@ -13,7 +13,10 @@ router.get('/', getMsg.asyncHandler(async (req, res) => {
             data: result
         }
     }
-    throw new Error('用户不存在！')
+    return {
+        msg: '用户不存在!',
+        data: result
+    }
 }))
 
 

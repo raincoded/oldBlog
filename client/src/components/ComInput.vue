@@ -2,22 +2,31 @@
   <!-- 评论的表单输入框 -->
   <div class="row py-2 px-3 bg-white" v-document-click="cancelComment">
     <div
+      placeholder="请输入您的评论"
+      contenteditable="true"
       class="col-12 border comments py-2"
       @click="selectComment"
-      contenteditable="true"
-      @input="editInput"
-    >
-      <span v-if="haveContent">评论</span>
-    </div>
+      @DOMSubtreeModified="editInput"
+    ></div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">用户名</span>
       </div>
-      <input type="text" class="form-control" placeholder="Username" />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="昵称"
+        v-model="name"
+      />
       <div class="input-group-prepend">
         <span class="input-group-text">邮箱</span>
       </div>
-      <input type="text" class="form-control" placeholder="Useremail" />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="邮箱"
+        v-model="email"
+      />
     </div>
     <div class="col-12 d-flex justify-content-between p-2">
       <i class="align-self-center cursor" @click="showEmojiHandle">
@@ -49,28 +58,33 @@
           :key="item.src"
           @click="appendEmoji(item, $event)"
         >
-          <img :src="item.url" :alt="item.phrase" class />
+          <img :src="item.url" :alt="item.phrase" class="emojiImg" />
         </div>
       </div>
-      <button class="btn btn-success">发表</button>
+      <button class="btn btn-success" @click="submitComment">发表</button>
     </div>
   </div>
 </template>
 <script>
-import Editor from "@/components/Editor.vue";
 import staticAjax from "@/ajax/static.js";
+import indexAjax from "@/ajax/index.js";
 import xss from "xss";
 export default {
+  props: ["articleId", "parent", "mainId", "secondId"],
+  model: {
+    prop: "refresh",
+    event: "change",
+  },
   data() {
     return {
-      haveContent: true,
       showEmoji: false,
       editHtml: "",
       emotions: [],
+      name: "",
+      email: "",
     };
   },
   components: {
-    Editor,
   },
   directives: {
     "document-click": {
@@ -82,17 +96,14 @@ export default {
   methods: {
     // 选中评论框
     selectComment(e) {
+      // console.log("选中了");
       e.stopPropagation();
       this.showEmoji = false;
-      this.haveContent = false;
     },
-
     // 取消选中评论框
     cancelComment(e) {
+      // console.log("取消了");
       e.stopPropagation();
-      if (this.editHtml == "<!---->" || this.editHtml == "") {
-        this.haveContent = true;
-      }
       this.showEmoji = false;
     },
     // 显示标情
@@ -103,24 +114,58 @@ export default {
     // 添加表情
     appendEmoji(item, $event) {
       $event.stopPropagation();
-      this.editHtml += "1"; // 让input事件感受到添加了表情
-      this.haveContent = false;
       $(
-        `<img src="${item.url}" alt="${item.phrase}"  class="emojiImg" />`
+        `<img src="${item.url}" alt="${item.phrase}" class="emojiImg"/>`
       ).appendTo($(".comments"));
       this.showEmoji = false;
     },
     // 评论评论框输入
     editInput(e) {
-      this.editHtml = $(e.target).html();
-      if (this.editHtml == "<!---->" || this.editHtml == "") {
-        this.haveContent = true;
+      this.editHtml = $(".comments").html();
+    },
+    submitComment() {
+      this.editHtml = xss(this.editHtml, {
+        whiteList: {
+          img: ["class", "src", "alt"],
+        },
+      });
+      this.name = xss(this.name);
+      this.email = xss(this.email);
+      const comment = {
+        content: this.editHtml,
+        articleId: this.articleId,
+      };
+      // console.log("articleId", this.articleId);
+      if (this.parent) {
+        // console.log("parent", this.parent);
+        comment.parent = this.parent;
       }
-      console.log("", $(e.target).html());
+      if (this.mainId) {
+        // console.log("mainId", this.mainId);
+        comment.mainId = this.mainId;
+      }
+      if (this.secondId) {
+        // console.log("secondId", this.secondId);
+        comment.secondId = this.secondId;
+      }
+      console.log("--------------------------");
+      // 不能存在时，需要提供cookie
+      // if (this.name && this.email) {}
+      comment.name = this.name;
+      comment.email = this.email;
+      console.log(comment);
+      indexAjax.submitComment(comment).then((req) => {
+        console.log("发表评论", req);
+        this.$emit("change", Date.now());
+         this.name='';
+         this.email='';
+         this.editHtml='';
+         $('.comments').html('')
+      });
     },
   },
   mounted() {
-    staticAjax.getEmoji().then(req => {
+    staticAjax.getEmoji().then((req) => {
       this.emotions = req;
     });
   },
@@ -129,6 +174,10 @@ export default {
 <style lang="scss" scoped>
 .comments {
   cursor: text;
+  &:empty::before {
+    color: lightgrey;
+    content: attr(placeholder);
+  }
 }
 .cursor {
   :hover {
@@ -138,7 +187,7 @@ export default {
 .emoji {
   position: absolute;
   height: 15rem;
-  width: 15rem;
+  width: 14rem;
   bottom: 3rem;
   left: 0;
   background: #fff;

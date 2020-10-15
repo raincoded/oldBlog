@@ -20,8 +20,28 @@ router.get('/', getMsg.asyncHandler(async (req, res) => {
             data: result
         }
     }
+    return {
+        msg: '没有相关评论！',
+        data: result
+    }
+}))
+
+/**
+ * 根据文章id获取评论
+ */
+router.get('/:id', getMsg.asyncHandler(async (req, res) => {
+    const result = await Service.CommentService.getCommentByArticleId(req.params.id);
+    // console.log('result', result);
+    if (result) {
+        return {
+            msg: '获取成功!',
+            data: result
+        }
+    }
     throw new Error('没有相关评论！')
 }))
+
+
 
 // 获取所有评论
 router.get('/all', getMsg.asyncHandler(async (req, res) => {
@@ -31,8 +51,10 @@ router.get('/all', getMsg.asyncHandler(async (req, res) => {
             msg: '获取成功！',
             data: result
         }
-    } else {
-        throw new Error('没有相关标签！')
+    }
+    return {
+        msg: '没有相关评论！',
+        data: result
     }
 }))
 
@@ -48,7 +70,7 @@ router.get('/all', getMsg.asyncHandler(async (req, res) => {
 router.post('/', getMsg.asyncHandler(async (req, res) => {
     // console.log('请求这IP地址',req.ip);
     // console.log('请求这IP地址',req.connection.remoteAddress);
-    const result = await Service.CommentService.addComment(req.body);
+    const result = await Service.CommentService.addComment(req.body.data);
     if (result) {
         delete result.updatedAt;
         // console.log(result.createdAt);
@@ -68,11 +90,11 @@ router.post('/', getMsg.asyncHandler(async (req, res) => {
 router.delete('/', getMsg.asyncHandler(async (req, res) => {
     const result = await Service.CommentService.deleteComment(req.query);
     if (result) {
-        return{
-            msg:'删除成功！'
+        return {
+            msg: '删除成功！'
         }
     }
-    
+    throw new Error('删除失败！');
 }))
 
 module.exports = router;

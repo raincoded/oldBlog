@@ -1,5 +1,4 @@
 const Comments = require("./../../mysql/models/Comments");
-const { Op } = require("sequelize"); // 用操作符是需要导入 Op
 const validate = require('validate.js'); // 数据验证
 const ArticleService = require('./ArticleService');
 const UserService = require('./UserService');
@@ -11,14 +10,17 @@ const pick = require('./until/pick');
  * @param {'int'} articleId 文章id
  * @param {'string'} content 评论内容
  * @param {'int'} parent 回复谁，无值则回复作者
- * @param {'int'} author 评论人
+ * @param {'int'} userId 评论人
+ * @param {'int'} mainId 评论id,表示属于哪条评论下
  * @param {'string'} name 未登录用户的name
  * @param {'string'} email 未登录用户的email
  */
 exports.addComment = async function (obj, ip) {
-    let newObj = pick(obj, 'articleId', 'content', 'parent', 'author');
+    let newObj = pick(obj, 'articleId', 'content', 'parent', 'userId', 'mainId', 'secondId');
+    // console.log(newObj);
+    newObj.articleId = +newObj.articleId;
     const testResult = validate({
-        articleId: +newObj.articleId,
+        articleId: newObj.articleId,
         content: newObj.content
     }, {
         articleId: {
@@ -33,6 +35,43 @@ exports.addComment = async function (obj, ip) {
     if (testResult) {
         throw testResult
     }
+    if (newObj.mainId) {
+        newObj.mainId = +newObj.mainId;
+        const testResult = validate({
+            mainId: newObj.mainId,
+        }, {
+            mainId: {
+                presence: true,
+                type: "integer",
+            },
+        })
+        if (testResult) {
+            throw testResult
+        }
+        const resultMain = await exports.getCommentById(newObj.mainId);
+        // console.log('comment',result);
+        if (!resultMain) {
+            throw new Error('评论不存在！')
+        }
+        if (newObj.secondId) { // 次评论在
+            newObj.secondId = +newObj.secondId;
+            const testResult = validate({
+                mainId: newObj.mainId,
+            }, {
+                mainId: {
+                    presence: true,
+                    type: "integer",
+                },
+            })
+            if (testResult) {
+                throw testResult
+            }
+            const resultSec = await exports.getCommentById(newObj.secondId);
+            if (!resultSec) {
+                throw new Error('评论不存在！')
+            }
+        }
+    }
     // 没设置回复对象表示回复文章作者
     if (!newObj.parent) {
         const ariticle = await ArticleService.getArticleById(newObj.articleId);
@@ -40,14 +79,43 @@ exports.addComment = async function (obj, ip) {
             throw new Error('文章不存在！')
         }
         newObj.parent = ariticle.userId;
+    } else {
+        newObj.parent = +newObj.parent;
+        const testResult = validate({
+            parent: newObj.parent,
+        }, {
+            parent: {
+                presence: true,
+                type: "integer",
+            },
+        })
+        if (testResult) {
+            throw testResult
+        }
+        console.log(newObj.parent);
+        // 回复别人的前提是别人已经评论过了
+        const result = await exports.getCommentByPage({ articleId: newObj.articleId, userId: newObj.parent });
+        if (result.count == 0) {
+            throw new Error('不能回复不存在的人！')
+        }
     }
+
     // 如果没有则创建游客
-    if (!newObj.author) {
-        const userMes = pick(obj, 'name', 'email')
-        userMes.power = -2;
-        userMes.password = '123456';
-        const user = await UserService.addUsers(userMes);
-        newObj.author = user.id;
+    if (!newObj.userId) {
+        const userMes = pick(obj, 'name', 'email');
+        const userResult = await UserService.getUserAll({
+            email: userMes.email
+        })
+        if (!userResult.count > 0) {
+            console.log(user);
+            newObj.userId = userResult.rows[0].id
+        }else{
+            userMes.power = -2;
+            userMes.password = '123456';
+            const user = await UserService.addUsers(userMes);
+        }
+
+        newObj.userId = user.id;
     }
     // console.log(newObj);
     const result = await Comments.create(newObj);
@@ -59,12 +127,14 @@ exports.addComment = async function (obj, ip) {
  * @param {'object'} page
  * @param {*} page int
  * @param {*} limit int
- * @param {*} articleId string
+ * @param {*} articleId int
  * @param {*} parent int
- * @param {*} author int
+ * @param {*} userId int
+ * @param {*} orderProp string 排序项
+ * @param {*} order string 排序方式（顺/逆）
  */
 exports.getCommentByPage = async function (obj) {
-    let { page = 1, limit = 10, articleId, parent, author } = obj;
+    let { page = 1, limit = 10, articleId, parent, userId, orderProp, order } = obj;
     const where = {}
     // 验证数据，由于不确定都有，需单独验证
     function testNumber(prop, num) {
@@ -86,23 +156,43 @@ exports.getCommentByPage = async function (obj) {
     testNumber('limit', limit) && (limit = +limit);
     testNumber('articleId', articleId) && (where.articleId = +articleId);
     testNumber('parent', parent) && (where.parent = +parent);
-    testNumber('author', author) && (where.author = +author);
-    const orderCondition = [];
-    if (orderProp) {
-        orderCondition.push(orderProp);
-        order?orderCondition.push(order):orderCondition.push("ASC")
-    }
-    const result = await Comments.findAndCountAll({
+    testNumber('userId', userId) && (where.userId = +userId);
+    const select = {
         attributes: { exclude: ['updatedAt', 'deletedAt'] },
         where: {
             ...where
         },
         offset: (page - 1) * limit,
         limit: +limit,
-        order: [orderCondition]
-    })
+    }
+
+    const orderCondition = [];
+    if (orderProp) {
+        orderCondition.push(orderProp);
+        order ? orderCondition.push(order) : orderCondition.push("ASC")
+        obj.order = [orderCondition];
+    }
+    const result = await Comments.findAndCountAll(select)
     // console.log('失败', result);
     return JSON.parse(JSON.stringify(result))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // if (page) {
     //     page = +page; // 转换成数字
     //     const testResult = validate({ page }, {
@@ -211,7 +301,7 @@ exports.deleteComment = async function (obj) {
         throw new Error('评论不存在！')
     }
     // 管理员或者删除自己的
-    if (userMes.power > 0 || userMes.id == commentMes.author) {
+    if (userMes.power > 0 || userMes.id == commentMes.userId) {
         return await Comments.destroy({
             where: {
                 id: newObj.id
@@ -240,4 +330,49 @@ exports.getCommentById = async function (id) {
     }
     const result = await Comments.findByPk(id);
     return JSON.parse(JSON.stringify(result))
+}
+
+/**
+ * 根据文章id查询所有评论
+ * @param {'int'} articleId 
+ */
+exports.getCommentByArticleId = async function (articleId) {
+    articleId = +articleId;
+    const testResult = validate({ articleId }, {
+        articleId: {
+            presence: true,
+            type: "integer",
+        },
+    })
+    if (testResult) {
+        throw testResult
+    }
+    let result = await Comments.findAll({
+        where: {
+            articleId,
+        },
+        attributes: { exclude: ['deletedAt', 'updatedAt'] }
+    })
+    result = JSON.parse(JSON.stringify(result));
+    for (const key of result) {
+        let parent = await searchUser(key.parent);
+        let userId = await searchUser(key.userId)
+        key.parent = parent;
+        key.userId = userId;
+    }
+    return result
+}
+async function searchUser(id) {
+    let result = await UserService.getUserById(id);
+    if (result) {
+        return {
+            id: result.id,
+            name: result.name
+        }
+    } else {
+        return {
+            id,
+            name: '匿名用户'
+        }
+    }
 }

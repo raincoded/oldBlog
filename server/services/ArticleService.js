@@ -42,15 +42,20 @@ exports.addArticle = async function (obj) {
         newObj.views = 0;
         newObj.title = xss(newObj.title);
         newObj.content = xss(newObj.content);
-        newObj.tag = xss(newObj.tag);
-        newObj.tag = newObj.tag.split(','); // 分割成数组
-        newObj.tag = unique(newObj.tag);// 去重
-        newObj.tag = tags.slice(0, 3);// 最多只能有3个标签
-
+        let tagStr = null;
+        if (newObj.tag) {
+            newObj.tag = xss(newObj.tag);
+            newObj.tag = newObj.tag.split(','); // 分割成数组
+            newObj.tag = unique(newObj.tag);// 去重
+            (newObj.tag.length > 3) && (newObj.tag = newObj.tag.slice(0, 3));// 最多只能有3个标签
+            tagStr = newObj.tag;
+            newObj.tag = newObj.tag.join(',');
+        }
         let result = await Article.create(newObj);// 添加文章
         result = JSON.parse(JSON.stringify(result));
-        if (newObj.tag) { // 标签存在就添加标签
-            newObj.tag.forEach(async tag => { // 循环添加标签
+        // console.log('标签', newObj.tag);
+        if (tagStr) { // 标签存在就添加标签
+            tagStr.forEach(async tag => { // 循环添加标签
                 await TagService.addTags({
                     tag,
                     articleId: result.id

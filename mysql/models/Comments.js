@@ -16,10 +16,19 @@ module.exports = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        author: { // 评论者
+        userId: { // 评论者
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        mainId: { // 评论id,表示属于哪条主评论下
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        secondId: {  // 评论id,表示属于哪条次评论下
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        }
+
     },
     {
         paranoid: true,

@@ -45,8 +45,12 @@ router.get('/', getMsg.asyncHandler(async (req, res) => {
             data: result
         }
     } else {
-        throw new Error('没有相关标签！')
+        return {
+            msg: '没有相关标签！',
+            data: result
+        }
     }
+   
 }))
 
 // 获取所有标签
@@ -58,7 +62,10 @@ router.get('/all', getMsg.asyncHandler(async (req, res) => {
             data: result
         }
     } else {
-        throw new Error('没有相关标签！')
+        return {
+            msg: '没有相关标签！',
+            data: result
+        }
     }
 }))
 

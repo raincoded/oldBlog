@@ -32,9 +32,9 @@ router.get('/all', getMsg.asyncHandler(async (req, res) => {
 
 // 根据id获取对应的文章
 router.get('/:id', getMsg.asyncHandler(async (req, res) => {
-    console.log('object');
+    // console.log('object');
     const result = await Service.ArticleService.getArticleById(req.params.id);
-    console.log('文章',result);
+    // console.log('文章',result);
     if (result) {
         return {
             msg: '获取成功！',

@@ -17,29 +17,33 @@ router.get('/:id', getMsg.asyncHandler(async (req, res) => {
             data: obj
         }
     } else {
-        throw new Error('用户不存在');
+        return {
+            msg: '用户不存在！',
+        }
     }
 }))
 
 // 注册账号
 router.post('/', getMsg.asyncHandler(async (req, res) => {
     const result = await Service.UserService.addUsers(req.body);
-    return {
-        msg: '注册成功',
-        data: {
-            id: result.id,
-            name: result.name,
-            email: result.email
+    if (result) {
+        return {
+            msg: '注册成功',
+            data: {
+                id: result.id,
+                name: result.name,
+                email: result.email
+            }
         }
     }
+    throw new Error('注册失败！')
 }))
 
 // 修改用户
 router.put('/', getMsg.asyncHandler(async (req, res) => {
     const result = await Service.UserService.updateUser(req.body);
-
     if (result) {
-        return '修改成功'
+        return '修改成功！'
     }
     throw new Error('用户不存在！')
 }))

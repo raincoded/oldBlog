@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import abc  from './comment'
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
@@ -16,6 +15,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    abc
   }
 })
 

@@ -1,23 +1,27 @@
 <template>
   <!-- 单独评论评论列表 -->
-  <div class="row p-1" :class="{'ml-4':comment.at.memberId}">
+  <div class="row p-1">
+     展示10条回复
     <div class="col-1 px-0">
       <avatar class="commentAvatar" />
     </div>
     <div class="col-11 py-2">
       <div>
-        <span v-if="comment.at.memberId">
-          <a href="#">{{comment.trueName}}</a> 回复
+        <span v-if="comment.userId">
+          <a href="#">{{ comment.userId.name }}</a>
         </span>
-        <span>
-          <a href="#" v-if="comment.at.memberId">{{comment.at.trueName}}</a>
-          <span v-else>{{comment.trueName}}</span>
-          : {{comment.content}}
+        <!-- 如果是直接评论，那么不会有回复2个字 -->
+        <span v-if="!hiddlen">
+          回复
+          <a href="#">{{ comment.parent.name }}</a>
         </span>
+        :
+        <span v-html="comment.content"></span>
+        <!-- : {{comment.content}} -->
       </div>
       <div class="initialism text-secondary">
-        {{comment.createTime}}
-        <i class="mx-1" @click="showEditor=true">
+        {{ new Date(comment.createdAt).toLocaleString() }}
+        <i class="mx-1" @click="showEditor = !showEditor">
           <svg
             width="1em"
             height="1em"
@@ -33,27 +37,49 @@
         </i>
       </div>
     </div>
-    <editor class="col-12" v-if="showEditor" />
+    <com-input
+      class="col-12"
+      :article-id="comment.articleId"
+      :parent="comment.userId.id"
+      :main-id="mainId"
+      :second-id="comment.id"
+      v-if="showEditor"
+      v-model="refresh"
+    />
   </div>
 </template>
 <script>
-import axios from "axios";
 import Avatar from "@/components/Avatar.vue";
-import Editor from "@/components/Editor.vue";
+import ComInput from "@/components/ComInput.vue";
 export default {
-  props: ["comment"],
+  props: ["comment", "hiddlen", "mainId", "refreshList"],
+  model: {
+    prop: "refreshList",
+    event: "change",
+  },
   components: {
     Avatar,
-    Editor,
+    ComInput,
   },
   data() {
     return {
       editor2: null,
       showEditor: false,
+      refresh: Date.now(),
     };
   },
   methods: {},
+  mounted() {
+    // console.log(this.comment);
+  },
+  watch: {
+    refreshList() {
+      this.$emit("change", Date.now());
+      this.showEditor = false;
+    },
+  },
 };
+
 // var obj = {
 //   content: "评论内容",
 //   memberId: "被评论人Id",
@@ -79,3 +105,5 @@ export default {
 //   at: {},
 // };
 </script>
+<style lang="scss" >
+</style>

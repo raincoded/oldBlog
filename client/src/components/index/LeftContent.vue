@@ -3,12 +3,12 @@
   <div class="row" v-if="article">
     <div class="bg-white w-100">
       <div class="w-100 bg-white p-3">
-        <h4 class="mb-0">
+        <h4 class="mb-2">
           <!-- 文章标题 -->
           <router-link
             :to="{ name: 'Content', params: { id: article.id } }"
             class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
-            >{{ article.title }}</router-link
+            ><em>{{ article.title }}</em></router-link
           >
         </h4>
         <!-- 文章正文 -->
