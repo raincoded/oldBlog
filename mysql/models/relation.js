@@ -4,6 +4,7 @@ const Article = require("./Article");
 const Tags = require("./Tags");
 const Comments = require("./Comments");
 const Praise = require('./Praise.js')
+const Message = require('./Message.js')
 
 Users.hasMany(Article)//用户有多篇文章
 Article.belongsTo(Users) // 每篇文章有一个用户
@@ -23,6 +24,8 @@ Praise.belongsTo(Article) // 每个赞都属于一个文章
 Users.hasMany(Praise) //用户有多个点赞
 Praise.belongsTo(Users) // 每个赞都属于一个用户
 
+Users.hasMany(Message) //管理员有多个留言
+Message.belongsTo(Users) // 每个留言属于管理员
 
 // 移除
 

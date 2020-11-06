@@ -9,14 +9,18 @@ const CommentService = require("./CommentService.js");
 
 const PraiseService = require("./PraiseService.js");
 
+const MessageService = require('./MessageService')
 
-module.exports={
+const EssaysService = require('./EssaysService')
+
+module.exports = {
     ArticleService,
     UserService,
     TagService,
     CommentService,
     PraiseService,
-
+    MessageService,
+    EssaysService
 }
 
 // 移除

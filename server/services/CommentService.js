@@ -3,7 +3,7 @@ const validate = require('validate.js'); // 数据验证
 const ArticleService = require('./ArticleService');
 const UserService = require('./UserService');
 const pick = require('./until/pick');
-
+const testNumber = require('./until/testNumber')
 /**
  * 发布评论
  * @param {'Object'} obj 
@@ -28,7 +28,9 @@ exports.addComment = async function (obj, ip) {
             type: "integer",
         },
         content: {
-            presence: true,
+            presence: {
+                allowEmpty: false, // 不允许为{},[],""," "
+            },
             type: "string",
         },
     })
@@ -92,7 +94,7 @@ exports.addComment = async function (obj, ip) {
         if (testResult) {
             throw testResult
         }
-        console.log(newObj.parent);
+        // console.log('parent', newObj.parent);
         // 回复别人的前提是别人已经评论过了
         const result = await exports.getCommentByPage({ articleId: newObj.articleId, userId: newObj.parent });
         if (result.count == 0) {
@@ -103,19 +105,22 @@ exports.addComment = async function (obj, ip) {
     // 如果没有则创建游客
     if (!newObj.userId) {
         const userMes = pick(obj, 'name', 'email');
-        const userResult = await UserService.getUserAll({
-            email: userMes.email
-        })
-        if (!userResult.count > 0) {
-            console.log(user);
+        if (!userMes.name) {
+            throw new Error("昵称不能为空！");
+        }
+        if (!userMes.email) {
+            throw new Error("邮箱不能为空！");
+        }
+        const userResult = await UserService.getUserByPage(userMes)
+        // console.log(userResult);
+        if (userResult.count > 0) {
             newObj.userId = userResult.rows[0].id
-        }else{
+        } else {
             userMes.power = -2;
             userMes.password = '123456';
             const user = await UserService.addUsers(userMes);
+            newObj.userId = user.id;
         }
-
-        newObj.userId = user.id;
     }
     // console.log(newObj);
     const result = await Comments.create(newObj);
@@ -124,7 +129,7 @@ exports.addComment = async function (obj, ip) {
 
 /**
  * 分页获取评论
- * @param {'object'} page
+ * @param {'object'} obj
  * @param {*} page int
  * @param {*} limit int
  * @param {*} articleId int
@@ -137,21 +142,21 @@ exports.getCommentByPage = async function (obj) {
     let { page = 1, limit = 10, articleId, parent, userId, orderProp, order } = obj;
     const where = {}
     // 验证数据，由于不确定都有，需单独验证
-    function testNumber(prop, num) {
-        if (num) {
-            const testResult = validate({ [prop]: +num }, {
-                [prop]: {
-                    presence: true,
-                    type: "integer"
-                }
-            });
-            if (testResult) {// 同步代码我们需手动抛出错误，异步会直接抛出
-                throw testResult
-            }
-            return true
-        }
-        return false
-    }
+    // function testNumber(prop, num) {
+    //     if (num) {
+    //         const testResult = validate({ [prop]: +num }, {
+    //             [prop]: {
+    //                 presence: true,
+    //                 type: "integer"
+    //             }
+    //         });
+    //         if (testResult) {// 同步代码我们需手动抛出错误，异步会直接抛出
+    //             throw testResult
+    //         }
+    //         return true
+    //     }
+    //     return false
+    // }
     testNumber('page', page) && (page = +page);
     testNumber('limit', limit) && (limit = +limit);
     testNumber('articleId', articleId) && (where.articleId = +articleId);
@@ -170,26 +175,11 @@ exports.getCommentByPage = async function (obj) {
     if (orderProp) {
         orderCondition.push(orderProp);
         order ? orderCondition.push(order) : orderCondition.push("ASC")
-        obj.order = [orderCondition];
+        select.order = [orderCondition];
     }
     const result = await Comments.findAndCountAll(select)
     // console.log('失败', result);
     return JSON.parse(JSON.stringify(result))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

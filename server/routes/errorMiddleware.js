@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
     const errObj = err instanceof Error ? err.message : err;
     //发生了错误
     console.log('发生了错误',errObj);
-    res.status(500).send(getMsg.getErr(errObj));
+    res.send(getMsg.getErr(errObj));
   } else {
     next();
   }

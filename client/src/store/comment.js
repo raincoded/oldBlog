@@ -11,7 +11,7 @@ function commentHandle(comment) {
         } else {
             const result = newCom.find((item) => {
                 // 是否之前添加过
-                return (item.mainId = comment[i].mainId);
+                return (item.id == comment[i].mainId);
             });
             if (!result) {
                 // 没有则添加children属性
@@ -31,21 +31,27 @@ function commentHandle(comment) {
 }
 export default {
     state: {
-        comments: [1, 2, 3],
+        comments: null,
+        curCom: null,
+        article:null,
     },
     mutations: {
-        changeCom(state, payload) {
+        comsChange(state, payload) {
             state.comments = payload;
-        }
+        },
+        curComChange(state, payload) {
+            state.curCom = payload;
+        },
+        articleChange(state, payload) {
+            state.article = payload;
+        },
     },
     actions: {
-        getComs({ commit }, paload) {
-            indexAjax.getCommentByArticleId(paload).then((req) => {
-                // console.log("comment", req);
-                // console.log(req[0].createAt > req[1].createAt);
-                const newComment = commentHandle(req);
-                commit('changeCom', newComment);
-                console.log("新评论", newComment);
+        comsGet({ commit,state }, paload) {
+            indexAjax.getCommentByArticleId(state.article.id).then((req) => {
+                const newComment = commentHandle(req.data);
+                commit('comsChange', newComment);
+                // console.log("新评论", newComment);
             });
         }
     },

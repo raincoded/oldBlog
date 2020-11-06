@@ -35,23 +35,17 @@
     <!-- 发表评论 -->
     <div class="col-12 bg-white mt-3 p-3">
       <!-- 最上方单独的评论 -->
-      <com-input
-        :article-id="article.id"
-        :parent="article.userId"
-        ele-id="articalContent"
-        v-model="refresh"
-      />
+      <com-input ele-id="articalContent" />
     </div>
     <!-- 评论区 -->
     <div class="col-12">
-     <comment />
+      <comment-list />
     </div>
   </div>
 </template>
 <script>
 import ComInput from "@/components/ComInput.vue";
-import Comment from "@/components/Comment.vue";
-// import EditorList from "@/components/EditorList.vue";
+import CommentList from "@/components/CommentList.vue";
 import indexAjax from "@/ajax/index.js";
 export default {
   data() {
@@ -59,72 +53,33 @@ export default {
       isGood: false,
       article: null,
       user: null,
-      praise: {},
-      comments: [],
-      refresh: Date.now(), // 组件事件信息
-      refreshList: Date.now(), // 组件事件信息
-      showSecCom: false,
     };
   },
   components: {
     ComInput,
-    Comment,
-    // EditorList,
+    CommentList,
   },
   methods: {
     async sendAjax(id) {
+      if (!id) {
+        return;
+      }
       // 请求文章
       indexAjax.getArticleById(id).then((req) => {
-        this.article = req;
+        this.article = req.data;
+        this.$store.commit("articleChange", req.data);
         indexAjax.getUserById(this.article.userId).then((req) => {
-          this.user = req;
+          this.user = req.data;
         });
-        // 请求文章评论
-        this.getComment();
+
+        // 请求文章评论。
+        this.$store.dispatch("comsGet");
       });
-    },
-    getComment() {
-      indexAjax.getCommentByArticleId(this.article.id).then((req) => {
-        // console.log("comment", req);
-        // console.log(req[0].createAt > req[1].createAt);
-        const newComment = this.commentHandle(req);
-        this.comments = newComment;
-        console.log("新评论", newComment);
-      });
-    },
-    commentHandle(comment) {
-      // 整理评论，将回复的整理至回复评论下
-      const newCom = []; // 新的数组
-      let len = comment.length;
-      for (let i = 0; i < len; i++) {
-        if (!comment[i].mainId) {
-          // 如果为null，直接添加到新数组中
-          comment[i].children = [];
-          newCom.push(comment[i]);
-        } else {
-          const result = newCom.find((item) => {
-            // 是否之前添加过
-            return (item.mainId = comment[i].mainId);
-          });
-          if (!result) {
-            // 没有则添加children属性
-            comment[i].children = [];
-          }
-          // 再次对次评论归类，将同一主评论下的同一次评论放一起
-          const secondIndex = result.children.lastIndexOf((item) => {
-            return (item.secondId = comment[i].secondId);
-          });
-          if (secondIndex != -1) {
-            result.children.splice(secondIndex, 0, comment[i]);
-          }
-          result.children.push(comment[i]); // push到children上
-        }
-      }
-      return newCom;
     },
   },
   mounted() {
-    // this.sendAjax(this.$route.params.id);
+    console.log(this.$store.state.articleId);
+    this.$store.commit("curComChange", null);
   },
   computed: {
     views() {
@@ -141,24 +96,23 @@ export default {
   watch: {
     "$route.params": {
       async handler() {
+        // 如果不是评论页面就不请求
         if (this.$route.params.id == undefined) {
           return;
         }
-        await indexAjax.addArticleVivew(this.$route.params.id);
-        await this.sendAjax(this.$route.params.id); // 获取文章
-        if (this.$route.params.id != this.$store.state.articleId) {
-          this.$store.commit("changeStateId", this.$route.params.id); // 默认是浏览量最高的
+        // 同一个文章时，不重复请求文章
+        if (
+          this.article &&
+          this.$route.params.id == this.$store.state.comment.article.id
+        ) {
+          return;
         }
+
+        await indexAjax.addArticleVivew(this.$route.params.id); // 增加文章的浏览量
+        await this.sendAjax(this.$route.params.id); // 获取文章
+        // this.$store.commit("changeStateId", this.$route.params.id); // 默认是浏览量最高的
       },
       immediate: true, //由于数据在第一次打开页面时要用，所以需要提前加载
-    },
-    refresh() {
-      // 提交成功后刷新评论
-      this.getComment();
-    },
-    refreshList() {
-      // 提交成功后刷新评论
-      this.getComment();
     },
   },
 };

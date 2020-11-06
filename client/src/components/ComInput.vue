@@ -1,10 +1,14 @@
 <template>
   <!-- 评论的表单输入框 -->
   <div class="row py-2 px-3 bg-white" v-document-click="cancelComment">
+    <p class="bg-secondary initialism border rounded p-1 text-white">
+      ！温馨提示：为了能够更好的留言交流，请务必填写正确可用邮箱，留言回复内容均以邮箱形式发送。
+    </p>
     <div
-      placeholder="请输入您的评论"
+      placeholder="请输入您的意见"
       contenteditable="true"
       class="col-12 border comments py-2"
+      :id="id"
       @click="selectComment"
       @DOMSubtreeModified="editInput"
     ></div>
@@ -54,7 +58,7 @@
       <div class="emoji border p-1" v-show="showEmoji">
         <div
           class="p-1 d-inline-flex"
-          v-for="item in emotions"
+          v-for="item in $store.state.emoji"
           :key="item.src"
           @click="appendEmoji(item, $event)"
         >
@@ -70,21 +74,23 @@ import staticAjax from "@/ajax/static.js";
 import indexAjax from "@/ajax/index.js";
 import xss from "xss";
 export default {
-  props: ["articleId", "parent", "mainId", "secondId"],
-  model: {
-    prop: "refresh",
-    event: "change",
-  },
+  props: ["comment", "updateCurCom"],
   data() {
     return {
       showEmoji: false,
       editHtml: "",
-      emotions: [],
       name: "",
       email: "",
     };
   },
-  components: {
+  computed: {
+    id() {
+      if (!this.comment) {
+        return `articleId${this.$store.state.comment.article.id}`;
+      } else {
+        return `comment${this.comment.id}`;
+      }
+    },
   },
   directives: {
     "document-click": {
@@ -106,7 +112,7 @@ export default {
       e.stopPropagation();
       this.showEmoji = false;
     },
-    // 显示标情
+    // 显示表情
     showEmojiHandle(e) {
       e.stopPropagation();
       this.showEmoji = !this.showEmoji;
@@ -116,12 +122,12 @@ export default {
       $event.stopPropagation();
       $(
         `<img src="${item.url}" alt="${item.phrase}" class="emojiImg"/>`
-      ).appendTo($(".comments"));
+      ).appendTo($(`#${this.id}`));
       this.showEmoji = false;
     },
     // 评论评论框输入
     editInput(e) {
-      this.editHtml = $(".comments").html();
+      this.editHtml = $(`#${this.id}`).html();
     },
     submitComment() {
       this.editHtml = xss(this.editHtml, {
@@ -129,46 +135,59 @@ export default {
           img: ["class", "src", "alt"],
         },
       });
-      this.name = xss(this.name);
-      this.email = xss(this.email);
+      if (!this.editHtml) {
+        alert("评论不能为空！");
+        return;
+      }
       const comment = {
         content: this.editHtml,
-        articleId: this.articleId,
+        articleId: this.$store.state.comment.article.id,
       };
-      // console.log("articleId", this.articleId);
-      if (this.parent) {
-        // console.log("parent", this.parent);
-        comment.parent = this.parent;
+      this.comment
+        ? (comment.parent = this.comment.userId.id)
+        : (comment.parent = this.$store.state.comment.article.userId.id);
+      if (this.comment) {
+        // 评论存在
+        if (this.comment.mainId) {
+          // 是不是次评论
+          comment.mainId = this.comment.mainId;
+        }
+        comment.mainId = this.comment.id; // 不是就用评论的id作为主评论
       }
-      if (this.mainId) {
-        // console.log("mainId", this.mainId);
-        comment.mainId = this.mainId;
-      }
-      if (this.secondId) {
-        // console.log("secondId", this.secondId);
-        comment.secondId = this.secondId;
-      }
-      console.log("--------------------------");
+      this.comment && (comment.secondId = this.comment.secondId);
+
+      // console.log("--------------------------");
       // 不能存在时，需要提供cookie
       // if (this.name && this.email) {}
-      comment.name = this.name;
-      comment.email = this.email;
-      console.log(comment);
+      if (false) {
+      } else {
+        this.name = xss(this.name);
+        this.email = xss(this.email);
+        comment.name = this.name;
+        comment.email = this.email;
+        if (!this.name) {
+          alert("昵称不能为空！");
+          return;
+        }
+        if (!this.email) {
+          alert("邮箱不能为空！");
+          return;
+        }
+      }
       indexAjax.submitComment(comment).then((req) => {
-        console.log("发表评论", req);
+        // console.log("发表评论", req.data);
         this.$emit("change", Date.now());
-         this.name='';
-         this.email='';
-         this.editHtml='';
-         $('.comments').html('')
+        this.name = "";
+        this.email = "";
+        this.editHtml = "";
+        $(".comments").html("");
+        // 重新获取文章评论
+        this.$store.dispatch("comsGet");
+        this.$store.commit("curComChange", null);
       });
     },
   },
-  mounted() {
-    staticAjax.getEmoji().then((req) => {
-      this.emotions = req;
-    });
-  },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>

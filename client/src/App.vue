@@ -28,6 +28,8 @@
 <script>
 import headerInd from "@/components/Header.vue";
 import RightContain from "@/components/RightContain.vue";
+import indexAjax from "@/ajax/index";
+
 export default {
   components: {
     RightContain,
@@ -49,6 +51,23 @@ export default {
     window.addEventListener("beforeunload", () => {
       sessionStorage.setItem("store", JSON.stringify(this.$store.state));
     });
+    this.$store.dispatch("emojiGet");
+
+    // 尝试登录
+    indexAjax
+      .login()
+      .then((req) => {
+        if (req.code == 0) {
+          console.log("当前用户", req.data);
+          this.$store.commit("userChange", req.data);
+        } else if (req.code == 500) {
+          console.log("未登录");
+          this.$store.commit("userChange", null);
+        }
+      })
+      .catch(() => {
+        this.$store.commit("userChange", null);
+      });
   },
 };
 </script>
@@ -77,5 +96,7 @@ footer {
 .content {
   min-height: calc(100vh - 6rem);
 }
-
+.cursor {
+  cursor: pointer;
+}
 </style>

@@ -4,7 +4,9 @@ require('./Article.js')//点赞
 require('./Tags.js')//标签
 require('./Comments.js')//评论
 require('./Praise.js')//点赞
-require('./Every_day.js')
+require('./Message.js') // 留言
+require('./Essays.js') //
+
 
 //移除
 // require('./移除/Article_Tag_mapping.js')

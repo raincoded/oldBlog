@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const port = 5008;
+const port = 80;
 const path = require("path");
-
+const cookieParser = require("cookie-parser");
 //指定静态资源路径
 const staticRoot = path.resolve(__dirname, "../public");
 
@@ -17,9 +17,17 @@ app.use(express.urlencoded({extended: true})); // extended表示是否使用新�
 
 // 解析 application/json 格式的请求体
 app.use(express.json());
+
 // 处理静态资源
 app.use(express.static(staticRoot));
+
 // app.set('trust proxy', true);// 处理代理地址
+
+// 使用cookie中间件
+app.use(cookieParser('nihao'));
+
+// 解析token
+app.use(require('./tokenMiddleware'))
 
 // 上传文本
 app.use("/upload/uploadTxt", require('./upload/uploadTxt'));
@@ -34,7 +42,9 @@ app.use("/api/article", require('./api/article'));
 app.use("/api/comment", require('./api/comment'));
 app.use("/api/tag", require('./api/tag'));
 app.use("/api/praise", require('./api/praise'));
+app.use("/api/essays", require('./api/essays'));
 app.use("/api/message", require('./api/message'));
+app.use("/api/other", require('./api/other'));
 
 // 错误中间件
 app.use(require('./errorMiddleware'))

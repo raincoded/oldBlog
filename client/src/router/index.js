@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     redirect: {
-      name:'Index'
+      name: 'Index'
     },
   },
   {
@@ -39,6 +39,11 @@ const routes = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
   },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: () => import(/* webpackChunkName: "Edit" */ '../views/Edit.vue')
+  }
 ]
 
 const router = new VueRouter({

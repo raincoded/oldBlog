@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Service = require('../../services/init'); // 服务层server
 const getMsg = require("../getSendResult"); // 辅助函数
-
+const md5 = require('md5');
+const crypt = require('../crypt')
+const validate = require('validate.js'); // 数据验证
 // 根据id获取用户
 router.get('/:id', getMsg.asyncHandler(async (req, res) => {
     const result = await Service.UserService.getUserById(req.params.id);
@@ -24,7 +26,7 @@ router.get('/:id', getMsg.asyncHandler(async (req, res) => {
 }))
 
 // 注册账号
-router.post('/', getMsg.asyncHandler(async (req, res) => {
+router.post('/register', getMsg.asyncHandler(async (req, res) => {
     const result = await Service.UserService.addUsers(req.body);
     if (result) {
         return {
@@ -39,6 +41,81 @@ router.post('/', getMsg.asyncHandler(async (req, res) => {
     throw new Error('注册失败！')
 }))
 
+// 登录
+router.post('/login', getMsg.asyncHandler(async (req, res) => {
+    console.log('userId', req.userId);
+    if (req.userId) {
+        const result = await Service.UserService.getUserById(req.userId);
+        if (result) {
+            return {
+                msg: '登录成功!',
+                data: {
+                    id: result.id,
+                    name: result.name,
+                    email: result.email
+                }
+            }
+        }
+        res.cookie('token', '', {
+            maxAge: new Date(-1000),
+            httpOne: true,
+        });
+        throw new Error('用户不存在！')
+    }
+    let { email, password } = req.body.data;
+    if (!email) {
+        throw new Error('缺少邮箱！')
+    } else {
+        const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g;
+        if (!reg.test(email)) {
+            throw new Error('邮箱格式不正确！')
+        }
+    }
+    if (!password) {
+        throw new Error('缺少密码！')
+    } else if (password.length > 16) {
+        throw new Error('密码长度不能大于16位！')
+    } else if (password.length < 6) {
+        throw new Error('密码长度不能小于6位！')
+    }
+    password = md5(password);
+    const queryResult = await Service.UserService.getUserByPage({ email });
+    if (queryResult.count > 0) {
+        if (queryResult.rows[0].password == password) {
+            let token = crypt.encrypt(queryResult.rows[0].id.toString()); // 对id进行加密
+            res.cookie('token', token, {
+                maxAge: 7 * 24 * 3600 * 1000,
+                httpOne: true,
+            });
+            res.header('authorization', token)
+            return {
+                msg: '登录成功!',
+                data: {
+                    id: queryResult.rows[0].id,
+                    name: queryResult.rows[0].name,
+                    email: queryResult.rows[0].email
+                }
+            }
+        } else {
+            throw new Error('密码错误！')
+        }
+    } else {
+        throw new Error('用户不存在！')
+    }
+
+    // const result = await Service.UserService.addUsers(req.body);
+    // if (result) {
+    //     return {
+    //         msg: '登录成功',
+    //         data: {
+    //             id: result.id,
+    //             name: result.name,
+    //             email: result.email
+    //         }
+    //     }
+    // }
+    // throw new Error('登录失败！')
+}))
 // 修改用户
 router.put('/', getMsg.asyncHandler(async (req, res) => {
     const result = await Service.UserService.updateUser(req.body);
@@ -62,6 +139,17 @@ router.delete('/', getMsg.asyncHandler(async (req, res) => {
     }
 }))
 
+router.post('/cancle', getMsg.asyncHandler(async (req, res) => {
+    console.log('取消登录', req.userId);
+    res.cookie('token', '', {
+        maxAge: new Date(-1000),
+        httpOne: true,
+    });
+    res.header('authorization', '')
+    return {
+        msg: '登出成功!'
+    }
+}))
 module.exports = router;
 
 // 验证邮箱，姓名，密码

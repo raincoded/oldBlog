@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
     cb(null, filename);
   },
 });
+console.log('上传');
 const upload = multer({
   storage,
   limits: {
@@ -29,12 +30,13 @@ const upload = multer({
     if (whitelist.includes(extname)) {
       cb(null, true);
     } else {
-      cb(new Error(`your ext name of ${extname} is not support`));
+      cb(new Error(`your extname of ${extname} is not support`));
     }
   },
 });
 
 router.post('/',upload.single('img'),(req, res) => {
+  console.log('上传图片');
   const url = `./upload/${req.file.filename}`;
   res.send({
     code: 0,

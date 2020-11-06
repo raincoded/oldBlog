@@ -31,8 +31,9 @@ export default {
     },
     // 获取文章，阅读，评论数量
     getArticleMes() {
-        return axios.get('/api/message/article')
+        return axios.get('/api/other/article')
     },
+    //增加浏览量
     addArticleVivew(articleId) {
         return axios.put(`/api/article/${articleId}`);
     },
@@ -50,10 +51,44 @@ export default {
     getCommentByArticleId(articleId) {
         return axios.get(`/api/comment/${articleId}`)
     },
-    submitComment(params){
-        return axios.post('/api/comment',{
-            data:params
+    // 提交评论
+    submitComment(params) {
+        return axios.post('/api/comment', {
+            data: params
         })
+    },
+    // 登录
+    login(params) {
+        return axios.post('/api/user/login', {
+            data: params
+        })
+    },
+    // 注册
+    register(params) {
+        return axios.post('/api/user/register', {
+            data: params
+        })
+    },
+    // 直接留言
+    pushMessage(params) {
+        return axios.post('/api/message', {
+            ...params
+        })
+    },
+    // 回复留言
+    replyMessage(params) {
+        return axios.post('/api/message', {
+            data: params
+        })
+    },
+    // 分页获取留言
+    getMessageByPage(params){
+        return axios.get('/api/message',{
+            params
+        })
+    },
+    // 取消登录
+    cancleLogin(){
+        return axios.post('/api/user/cancle')
     }
-
 }

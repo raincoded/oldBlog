@@ -1,6 +1,6 @@
 <template>
   <!-- 分页 -->
-  <nav aria-label="Page navigation example" v-if="allPage > 2">
+  <nav aria-label="Page navigation example" v-if="allPage >= 2">
     <ul class="pagination justify-content-center mb-0">
       <li
         class="page-item"
@@ -65,9 +65,7 @@ export default {
   },
   computed: {
     allPage() {
-      // console.log(this.count);
       return Math.floor(this.count / this.limit);
-      // return 20;
     },
     viewPage() {
       const arr = [];
@@ -117,6 +115,9 @@ export default {
       this.$emit("change", newPage); //出发自定义change事件，传值给父组件
     },
   },
+  mounted(){
+    console.log(this.count);
+  }
 };
 </script>
 <style lang="scss" scoped>

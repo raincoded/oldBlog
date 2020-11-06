@@ -21,7 +21,7 @@
         </div>
         <!-- github和email -->
         <div class="mr-3">
-          <a href="https://github.com/raincoded" target="_blanl" class="mr-2">
+          <a href="https://github.com/raincoded" target="_blank" class="mr-2" data-toggle="tooltip" data-placement="top" title="前往gitHub">
             <svg
               height="2rem"
               viewBox="0 0 16 16"
@@ -34,7 +34,7 @@
               />
             </svg>
           </a>
-          <a href="#" target="_blanl" class="mr-2">
+          <a href="mailto:1614794159@qq.com" class="mr-2" data-toggle="tooltip" data-placement="top" title="发送邮件">
             <svg
               width="2em"
               height="1.5em"
@@ -89,7 +89,7 @@
             :key="article.id"
           >
             <a
-              :to="{name:'Content',params:{id: article.id}}"
+              :to="{ name: 'Content', params: { id: article.id } }"
               @click="clickHandle(article.id)"
               class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
               >{{ article.title }}{{ article.id }}</a
@@ -113,17 +113,18 @@
           <h6 class="mb-0">最新留言</h6>
         </div>
         <div class="row mx-0 mt-1">
-          <div class="col-12" v-for="item in 4" :key="item">
+          <div class="col-12" v-for="message in $store.state.newMessages.rows" :key="message.id">
             <p class="mb-0">
               <router-link
                 :to="{ name: 'Message' }"
                 class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
-                >繁华落尽，繁华落尽，繁华落尽，曲终人散。。。。</router-link
+                v-html="message.content"
+                ></router-link
               >
             </p>
             <p class="min-font text-secondary mb-2">
-              <span class="mx-3">Lvtu</span>
-              <span>评论于09-13</span>
+              <span class="mx-3">{{message.name}}</span>
+              <span>评论于 {{new Date(message.createdAt).toLocaleString()}}</span>
             </p>
           </div>
         </div>
@@ -134,6 +135,9 @@
 <script>
 import Avatar from "@/components/Avatar.vue";
 import indexAjax from "@/ajax/index.js";
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 export default {
   data() {
     return {
@@ -157,9 +161,12 @@ export default {
       }
       if (this.$route.path != `/content/${id}`) {
         // console.log("非本页");
-        this.$router.push({ name: "Content",params:{
-          id:id
-        } });
+        this.$router.push({
+          name: "Content",
+          params: {
+            id: id,
+          },
+        });
       }
     },
   },
@@ -188,13 +195,14 @@ export default {
         order: "DESC",
       })
       .then((req) => {
-        this.hotArticle = req;
-        this.$store.commit("changeStateId", req.rows[0].id); // 默认是浏览量最高的
+        this.hotArticle = req.data;
+        this.$store.commit("changeStateId", req.data.rows[0].id); // 默认是浏览量最高的
       });
     // 获取文章，阅读，评论数量
     indexAjax.getArticleMes().then((req) => {
-      this.articleMes = req;
+      this.articleMes = req.data;
     });
+    this.$store.dispatch("getNewMessages");
   },
 };
 </script>

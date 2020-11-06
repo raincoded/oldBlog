@@ -1,4 +1,7 @@
 const Tags = require("./../../mysql/models/Tags");
+const Article = require("./../../mysql/models/Article");
+const Users = require("./../../mysql/models/Users");
+require("./../../mysql/models/relation");
 const { Op } = require("sequelize"); // 用操作符是需要导入 Op
 const db = require("../../mysql/models/db"); // 去重需要用sequelize实例
 const validate = require('validate.js'); // 数据验证
@@ -89,6 +92,18 @@ exports.getTagsByPage = async function (obj) {
 // 获取所有标签
 exports.getTagsAll = async function () {
     const result = await Tags.findAll({ attributes: { exclude: ['deletedAt', 'createdAt', 'updatedAt'] } })
+    // const result = await Tags.findAll({
+    //     include: [{
+    //         model: Article,
+    //         attributes: { exclude: ['deletedAt', 'createdAt', 'updatedAt'] },
+    //         required: false ,//默认为true表示Article表没有数据，整个回调将会返回为空；fasle 的时候返回用户信息，Article表有信息则添加一个字段，没有则之返回用户信息
+    //         include:[{
+    //             model: Users,
+    //             attributes: { exclude: ['deletedAt', 'createdAt', 'updatedAt','password','power'] },
+    //             required: false 
+    //         }]
+    //     }]
+    // })
     return JSON.parse(JSON.stringify(result))
 }
 

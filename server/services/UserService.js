@@ -103,7 +103,8 @@ exports.getUserById = async function (id) {
     if (testResult) {
         throw testResult
     }
-    return await Users.findByPk(id);
+    let result = await Users.findByPk(id);
+    return JSON.parse(JSON.stringify(result))
 }
 
 /**
@@ -116,7 +117,7 @@ exports.getUserById = async function (id) {
  * @param {*} email string
  * @param {*} name string
  */
-exports.getUserAll = async function (obj) {
+exports.getUserByPage = async function (obj) {
     let { page = 1, limit = 10, id, email, name, power } = obj;
     const where = {};
     // 验证数据，由于不确定都有，需单独验证
@@ -131,7 +132,8 @@ exports.getUserAll = async function (obj) {
         if (testResult) {// 同步代码我们需手动抛出错误，异步会直接抛出
             throw testResult
         }
-    } if (limit) {
+    }
+    if (limit) {
         limit = +limit; // 转换成数字
         const testResult = validate({ limit }, {
             limit: {
@@ -204,7 +206,7 @@ exports.getUserAll = async function (obj) {
     // email && (where.email = email);
     // name && (where.name = { [Op.like]: `%${name}%` });
     const result = await Users.findAndCountAll({
-        attributes: { exclude: ['updatedAt','deletedAt'] },
+        attributes: { exclude: ['updatedAt', 'deletedAt'] },
         where,
         offset: (page - 1) * limit,
         limit: +limit,
@@ -298,7 +300,7 @@ exports.updateUser = async function (obj) {
     return await Users.update({
         ...newObj
     }, {
-        attributes: { exclude: ['updatedAt','deletedAt'] },
+        attributes: { exclude: ['updatedAt', 'deletedAt'] },
         where: {
             id,
         },

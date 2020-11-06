@@ -5,10 +5,16 @@
       <div class="w-100 bg-white p-3">
         <h4 class="mb-2">
           <!-- 文章标题 -->
-          <router-link
-            :to="{ name: 'Content', params: { id: article.id } }"
+          <!-- <router-link
+            :to="{ name: 'Content', params: { id: article.id }}"
+            v-slot="{ href, navigate, isActive }"
             class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
-            ><em>{{ article.title }}</em></router-link
+            ><em :active="isActive" :href="href" @click="navigate">{{ article.title }}</em></router-link
+          > -->
+          <em
+            class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
+            @click="clickHandle(article.id)"
+            >{{ article.title }}</em
           >
         </h4>
         <!-- 文章正文 -->
@@ -27,7 +33,7 @@
           <router-link
             v-for="tag of articleTag"
             :key="`${tag}${article.id}`"
-            :to="{ name: 'Content' , params: { id: 27 } }"
+            :to="{ name: 'Content', params: { id: 27 } }"
             class="text-decoration-none cursor text-white mr-2"
             >{{ tag }}</router-link
           ></template
@@ -41,6 +47,24 @@ export default {
   props: ["article"],
   data() {
     return {};
+  },
+  methods: {
+    clickHandle(id) {
+      // console.log(this.$route.path,`/content/${id}`);
+      if (this.$store.state.articleId !== id) {
+        // console.log("改变", id);
+        this.$store.commit("changeStateId", id);
+      }
+      if (this.$route.path != `/content/${id}`) {
+        // console.log("非本页");
+        this.$router.push({
+          name: "Content",
+          params: {
+            id: id,
+          },
+        });
+      }
+    },
   },
   mounted() {},
   computed: {
@@ -68,7 +92,7 @@ export default {
   cursor: pointer;
   color: #333;
   &:hover {
-    color: #27afaf!important;
+    color: #27afaf !important;
   }
 }
 </style>

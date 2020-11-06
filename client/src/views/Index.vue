@@ -1,8 +1,7 @@
 <template>
+  <!-- 首页 -->
   <div class="row mx-0">
-    <!-- <div class="col-12 bg-dark text-white py-3">
-      你只有评价自己的能力，没有评价别人的资格！
-    </div> -->
+    <!-- 左侧内容 -->
     <div class="col-12">
       <left-content
         :article="article"
@@ -11,8 +10,14 @@
         class="mb-3"
       />
     </div>
-    <div class="col-12 pt-3">
-      <pager v-model="curPage" :count="articles.count" :curPage="curPage" :limit="limit"/>
+    <!-- 分页 -->
+    <div class="col-12 pt-3" v-if="articles.count > 6">
+      <pager
+        v-model="curPage"
+        :count="articles.count"
+        :curPage="curPage"
+        :limit="limit"
+      />
     </div>
   </div>
 </template>
@@ -25,7 +30,7 @@ export default {
     return {
       articles: [],
       limit: 6,
-      curPage:1,
+      curPage: 1,
     };
   },
   components: {
@@ -43,15 +48,15 @@ export default {
           limit: this.limit,
         })
         .then((req) => {
-          this.articles = req;
+          this.articles = req.data;
         });
     },
   },
-  watch:{
-      curPage(){
-          this.getArticles();
-      }
-  }
+  watch: {
+    curPage() {
+      this.getArticles();
+    },
+  },
 };
 </script>
 <style lange="scss" scoped>
