@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     allPage() {
-      return Math.floor(this.count / this.limit);
+      return Math.ceil(this.count / this.limit);
     },
     viewPage() {
       const arr = [];
@@ -116,7 +116,7 @@ export default {
     },
   },
   mounted(){
-    console.log(this.count);
+    // console.log(this.count);
   }
 };
 </script>

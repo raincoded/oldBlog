@@ -1,0 +1,97 @@
+[{
+        "title": "美食",
+        "iCont": "food",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "外卖",
+        "iCont": "takeout",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "酒店",
+        "iCont": "hotel",
+        "isHot": true,
+        "children": []
+    },
+    {
+        "title": "民宿",
+        "iCont": "homestay",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "猫眼电影",
+        "iCont": "movie",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "机票 / 火车票",
+        "iCont": "airport",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "休闲娱乐 / KTV",
+        "iCont": "ktv",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "生活服务",
+        "iCont": "life",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "丽人 / 美发 / 医学美容",
+        "iCont": "hair",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "结婚 / 婚纱摄影 / 婚宴",
+        "iCont": "marry",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "亲子 / 儿童乐园 / 幼教",
+        "iCont": "offspring",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "运动健身 / 健身中心",
+        "iCont": "sport",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "家装 / 建材 / 家居",
+        "iCont": "furniture",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "学习培训 / 音乐培训",
+        "iCont": "study",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "医疗健康 / 宠物 / 爱车",
+        "iCont": "health",
+        "isHot": false,
+        "children": []
+    },
+    {
+        "title": "酒吧 / 密室逃脱",
+        "iCont": "bar",
+        "isHot": false,
+        "children": []
+    },
+],

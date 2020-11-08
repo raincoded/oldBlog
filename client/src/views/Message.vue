@@ -2,7 +2,12 @@
   <div class="row mx-0">
     <!-- 留言输入 -->
     <div class="col-12">
-      <message-input id="message-0" v-model="curTime" />
+      <message-input
+        id="message-0"
+        v-model="curTime"
+        :curPage="curPage"
+        :limit="limit"
+      />
     </div>
     <!-- 留言列表 -->
     <div class="col-12 p-0 mt-3 bg-white" v-if="$store.state.message.messages">
@@ -29,7 +34,7 @@
     </div>
     <!-- 留言分页 -->
     <!-- <div class="col-12 pt-3" v-if="$store.state.message.messages.count > 6"> -->
-    <div class="col-12 pt-3">
+    <div class="col-12 pt-3" v-if="$store.state.message.messages">
       <pager
         v-model="curPage"
         :count="$store.state.message.messages.count"
@@ -60,14 +65,10 @@ export default {
   },
   methods: {
     getMessages() {
-      this.$store
-        .dispatch("messagesGet", {
-          page: this.curPage,
-          limit: this.limit,
-        })
-        .then(() => {
-          console.log(this.$store.state.message);
-        });
+      this.$store.dispatch("messagesGet", {
+        page: this.curPage,
+        limit: this.limit,
+      });
     },
   },
   watch: {
@@ -75,7 +76,7 @@ export default {
       this.getMessages();
     },
     curTime() {
-      console.log("变化了");
+      // console.log("变化了");
       this.getMessages();
     },
   },

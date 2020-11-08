@@ -1,14 +1,14 @@
 // 数据库初始化，搭建数据库mysql
-// require('./mysql/models/init')
+// require('./server/project/blog/initMysql')
 
 // 路由层router
-require('./server/routes/init.js')
+require('./server/init.js')
 
 // 服务层server
-const Service = require('./server/services/init');
+const Service = require('./server/project/blog/initServer');
 
 // 模拟数据mock
-require('./until/mock/init')
+// require('./until/mock/init')
 
 // 用户
 

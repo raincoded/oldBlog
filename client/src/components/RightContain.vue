@@ -21,7 +21,14 @@
         </div>
         <!-- github和email -->
         <div class="mr-3">
-          <a href="https://github.com/raincoded" target="_blank" class="mr-2" data-toggle="tooltip" data-placement="top" title="前往gitHub">
+          <a
+            href="https://github.com/raincoded"
+            target="_blank"
+            class="mr-2"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="前往gitHub"
+          >
             <svg
               height="2rem"
               viewBox="0 0 16 16"
@@ -34,7 +41,13 @@
               />
             </svg>
           </a>
-          <a href="mailto:1614794159@qq.com" class="mr-2" data-toggle="tooltip" data-placement="top" title="发送邮件">
+          <a
+            href="mailto:1614794159@qq.com"
+            class="mr-2"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="发送邮件"
+          >
             <svg
               width="2em"
               height="1.5em"
@@ -82,7 +95,7 @@
         <h6 class="mb-0">最新热门</h6>
       </div>
       <div class="col-12 px-0">
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" v-if="hotArticle">
           <li
             class="list-group-item list-group-item-action list-group-item-light py-1"
             v-for="article in hotArticle.rows"
@@ -112,19 +125,24 @@
         >
           <h6 class="mb-0">最新留言</h6>
         </div>
-        <div class="row mx-0 mt-1">
-          <div class="col-12" v-for="message in $store.state.newMessages.rows" :key="message.id">
+        <div class="row mx-0 mt-1" v-if="$store.state.newMessages">
+          <div
+            class="col-12"
+            v-for="message in $store.state.newMessages.rows"
+            :key="message.id"
+          >
             <p class="mb-0">
               <router-link
                 :to="{ name: 'Message' }"
                 class="text-decoration-none cursor d-inline-block w-100 text-nowrap text-truncate"
                 v-html="message.content"
-                ></router-link
-              >
+              ></router-link>
             </p>
             <p class="min-font text-secondary mb-2">
-              <span class="mx-3">{{message.name}}</span>
-              <span>评论于 {{new Date(message.createdAt).toLocaleString()}}</span>
+              <span class="mx-3">{{ message.name }}</span>
+              <span
+                >评论于 {{ new Date(message.createdAt).toLocaleString() }}</span
+              >
             </p>
           </div>
         </div>
@@ -136,13 +154,13 @@
 import Avatar from "@/components/Avatar.vue";
 import indexAjax from "@/ajax/index.js";
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+  $('[data-toggle="tooltip"]').tooltip();
+});
 export default {
   data() {
     return {
       SuiBiIndex: 1,
-      hotArticle: [],
+      hotArticle: null,
       articleMes: { articleRotal: 0, viewsRotal: 0, commentRotal: 0 },
     };
   },
@@ -195,6 +213,7 @@ export default {
         order: "DESC",
       })
       .then((req) => {
+        console.log("热门", req);
         this.hotArticle = req.data;
         this.$store.commit("changeStateId", req.data.rows[0].id); // 默认是浏览量最高的
       });

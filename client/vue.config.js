@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path')
 module.exports = {
-  outputDir:path.resolve(__dirname,'../server/public'),
+  outputDir: path.resolve(__dirname, '../server/public/blog'),
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
@@ -11,9 +11,10 @@ module.exports = {
       })
     ]
   },
+  publicPath: process.env.NODE_ENV === 'production' &&  '/blog',
   devServer: {
     proxy: {
-      '/api': {
+      '/blog': {
         target: 'http://localhost:5008', //API服务器的地址
         ws: true, //代理websockets
         changeOrigin: true, // 虚拟的站点需要更管origin

@@ -73,7 +73,7 @@ import staticAjax from "@/ajax/static.js";
 import indexAjax from "@/ajax/index.js";
 import xss from "xss";
 export default {
-  props: ["comment", "updateCurCom", "id", "curTime"],
+  props: ["comment", "updateCurCom", "id", "curTime","curPage", "limit"],
   model: {
     prop: "curTime",
     event: "change",
@@ -180,8 +180,11 @@ export default {
               this.editHtml = "";
               $(`#${this.id}`).html("");
               alert("留言成功!");
-              this.$emit('change',new Date()) // 通知父组件需要更新留言
-               this.$store.dispatch("getNewMessages");
+              // this.$emit('change',new Date()) // 通知父组件需要更新留言
+              this.$store.dispatch("messagesGet",{
+                page:this.curPage,
+                limit:this.limit,
+              });
             } else if (req.code == 500) {
               if (req.msg.content) {
                 alert("留言内容不能为空!");

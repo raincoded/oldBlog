@@ -2,11 +2,19 @@ import indexAjax from '@/ajax/index.js'
 export default {
     state: {
         messages: null,
+        // curPage: 1,
+        // limit: 6,
     },
     mutations: {
         messagesChange(state, payload) {
             state.messages = payload;
         },
+        // curPageChange(state, payload) {
+        //     state.curPage = payload;
+        // },
+        // limitChange(state, payload) {
+        //     state.limit = payload;
+        // },
     },
     actions: {
         // 获取留言
@@ -20,9 +28,7 @@ export default {
                         code: 0, rows: []
                     });
                 }
-
-
             });
-        }
+        },
     },
 }

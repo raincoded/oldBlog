@@ -1,0 +1,1125 @@
+[
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/meishi/",
+                "item": "美食"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/meishi/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/meishi/c393/",
+            "item": "代金券"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c11/",
+            "item": "甜点饮品"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c17/",
+            "item": "火锅"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c40/",
+            "item": "自助餐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c36/",
+            "item": "小吃快餐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c28/",
+            "item": "日韩料理"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c35/",
+            "item": "西餐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c395/",
+            "item": "聚餐宴请"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c54/",
+            "item": "烧烤烤肉"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c20003/",
+            "item": "东北菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c55/",
+            "item": "川湘菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c56/",
+            "item": "江浙菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c20004/",
+            "item": "香锅烤鱼"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c57/",
+            "item": "粤港菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c400/",
+            "item": "中式烧烤/烤串"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c58/",
+            "item": "西北菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c41/",
+            "item": "咖啡酒吧茶馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c60/",
+            "item": "云贵菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c62/",
+            "item": "东南亚菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c63/",
+            "item": "海鲜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c217/",
+            "item": "素食"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c227/",
+            "item": "台湾/客家菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c228/",
+            "item": "创意菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c229/",
+            "item": "汤/粥/炖菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c232/",
+            "item": "蒙餐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c233/",
+            "item": "新疆菜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c24/",
+            "item": "其他美食"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/meishi/c59/",
+            "item": "京菜鲁菜"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://waimai.meituan.com",
+                "item": "外卖"
+            },
+            "more": {
+                "href": "https://waimai.meituan.com",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://waimai.meituan.com",
+            "item": "美团外卖"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://hotel.meituan.com",
+                "item": "酒店星级"
+            },
+            "more": {
+                "href": "https://hotel.meituan.com",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://hotel.meituan.com/dachangzizhixian/xj6",
+            "item": "经济型"
+        }, {
+            "href": "https://hotel.meituan.com/dachangzizhixian/xj45",
+            "item": "舒适/三星"
+        }, {
+            "href": "https://hotel.meituan.com/dachangzizhixian/xj23",
+            "item": "高档/四星"
+        }, {
+            "href": "https://hotel.meituan.com/dachangzizhixian/xj01",
+            "item": "豪华/五星"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://minsu.meituan.com/?phx_wake_up_type=mtpc_category&phx_wake_up_source=hot_c",
+                "item": "热门城市"
+            },
+            "more": {
+                "href": "https://minsu.meituan.com/?phx_wake_up_type=mtpc_category&phx_wake_up_source=hot_c",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://minsu.meituan.com/q/shanghai/?phx_wake_up_type=mtpc_category&phx_wake_up_source=shanghai",
+            "item": "上海"
+        }, {
+            "href": "https://minsu.meituan.com/q/chengdu/?phx_wake_up_type=mtpc_category&phx_wake_up_source=chengdu",
+            "item": "成都"
+        }, {
+            "href": "https://minsu.meituan.com/q/beijing/?phx_wake_up_type=mtpc_category&phx_wake_up_source=beijing",
+            "item": "北京"
+        }, {
+            "href": "https://minsu.meituan.com/q/chongqing/?phx_wake_up_type=mtpc_category&phx_wake_up_source=chongqing",
+            "item": "重庆"
+        }, {
+            "href": "https://minsu.meituan.com/q/nanjing/?phx_wake_up_type=mtpc_category&phx_wake_up_source=nanjing",
+            "item": "南京"
+        }, {
+            "href": "https://minsu.meituan.com/q/hangzhou/?phx_wake_up_type=mtpc_category&phx_wake_up_source=hangzhou",
+            "item": "杭州"
+        }, {
+            "href": "https://minsu.meituan.com/q/guangzhou/?phx_wake_up_type=mtpc_category&phx_wake_up_source=guangzhou",
+            "item": "广州"
+        }, {
+            "href": "https://minsu.meituan.com/q/xian/?phx_wake_up_type=mtpc_category&phx_wake_up_source=xian",
+            "item": "西安"
+        }, {
+            "href": "https://minsu.meituan.com/q/wuhan/?phx_wake_up_type=mtpc_category&phx_wake_up_source=wuhan",
+            "item": "武汉"
+        }, {
+            "href": "https://minsu.meituan.com/q/xiamen/?phx_wake_up_type=mtpc_category&phx_wake_up_source=xiamen",
+            "item": "厦门"
+        }, {
+            "href": "https://minsu.meituan.com/q/changsha/?phx_wake_up_type=mtpc_category&phx_wake_up_source=changsha",
+            "item": "长沙"
+        }, {
+            "href": "https://minsu.meituan.com/q/qingdao/?phx_wake_up_type=mtpc_category&phx_wake_up_source=qingdao",
+            "item": "青岛"
+        }, {
+            "href": "https://minsu.meituan.com/q/shenzhen/?phx_wake_up_type=mtpc_category&phx_wake_up_source=shenzhen",
+            "item": "深圳"
+        }, {
+            "href": "https://minsu.meituan.com/q/tianjin/?phx_wake_up_type=mtpc_category&phx_wake_up_source=tianjin",
+            "item": "天津"
+        }, {
+            "href": "https://minsu.meituan.com/q/suzhou/?phx_wake_up_type=mtpc_category&phx_wake_up_source=suzhou",
+            "item": "苏州"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://minsu.meituan.com/?phx_wake_up_type=mtpc_category&phx_wake_up_source=hot_p",
+                "item": "热门房源"
+            },
+            "more": {
+                "href": "https://minsu.meituan.com/?phx_wake_up_type=mtpc_category&phx_wake_up_source=hot_p",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://minsu.meituan.com/q/6270041/?phx_wake_up_type=mtpc_category&phx_wake_up_source=loft",
+            "item": "复式Loft"
+        }, {
+            "href": "https://minsu.meituan.com/q/6332019/?phx_wake_up_type=mtpc_category&phx_wake_up_source=bieshu",
+            "item": "别墅"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://maoyan.com",
+                "item": "热映电影"
+            },
+            "more": {
+                "href": "https://maoyan.com",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://maoyan.com/films/346210",
+            "item": "八佰"
+        }, {
+            "href": "https://maoyan.com/films/489894",
+            "item": "我在时间尽头等你"
+        }, {
+            "href": "https://maoyan.com/films/1297973",
+            "item": "信条"
+        }, {
+            "href": "https://maoyan.com/films/1284572",
+            "item": "1/2的魔法"
+        }, {
+            "href": "https://maoyan.com/films/1299144",
+            "item": "阿里巴巴与神灯"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://www.meituan.com/flight/",
+                "item": "机票"
+            },
+            "more": {
+                "href": "https://www.meituan.com/flight/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://www.meituan.com/flight/",
+            "item": "国内机票"
+        }, {
+            "href": "https://www.meituan.com/iflight/",
+            "item": "国际/港澳台机票"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://www.meituan.com/train/",
+                "item": "火车票"
+            },
+            "more": {
+                "href": "https://www.meituan.com/train/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://www.meituan.com/train/",
+            "item": "火车票"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xiuxianyule/",
+                "item": "休闲娱乐"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xiuxianyule/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c52/",
+            "item": "足疗按摩"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c112/",
+            "item": "洗浴/汗蒸"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c234/",
+            "item": "酒吧"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c230/",
+            "item": "密室逃脱"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20773/",
+            "item": "轰趴馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20772/",
+            "item": "茶馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20104/",
+            "item": "私人影院"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c218/",
+            "item": "DIY手工坊"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c516/",
+            "item": "采摘/农家乐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20770/",
+            "item": "网吧网咖"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c38/",
+            "item": "游乐游艺"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20779/",
+            "item": "VR"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20777/",
+            "item": "桌面游戏"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c219/",
+            "item": "真人CS"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20776/",
+            "item": "棋牌室"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c26/",
+            "item": "其他玩乐"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c10/",
+                "item": "KTV"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c10/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c10/",
+            "item": "KTV"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/shenghuo/",
+                "item": "生活服务"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/shenghuo/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20112/",
+            "item": "衣物/皮具洗护"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20113/",
+            "item": "家政"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20454/",
+            "item": "搬家运输"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20453/",
+            "item": "送水"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20111/",
+            "item": "充值缴费"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20057/",
+            "item": "服饰/鞋包养护"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20457/",
+            "item": "开锁换锁"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20474/",
+            "item": "居家维修"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20456/",
+            "item": "管道疏通"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20459/",
+            "item": "家电维修清洗"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20458/",
+            "item": "电脑维修"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20460/",
+            "item": "手机维修"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c20196/",
+            "item": "证件照/肖像摄影"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c221/",
+            "item": "照片冲印/图文文印"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c21006/",
+            "item": "商务服务/法律服务"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c21007/",
+            "item": "文化传媒机构"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/shenghuo/c21113/",
+            "item": "成人用品/情趣用品"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/jiankangliren/",
+                "item": "丽人"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/jiankangliren/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c74/",
+            "item": "美发"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c75/",
+            "item": "美甲美睫"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c76/",
+            "item": "美容美体"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c20423/",
+            "item": "医学美容"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c220/",
+            "item": "瑜伽舞蹈"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c20422/",
+            "item": "瘦身纤体"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c20419/",
+            "item": "韩式定妆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c20421/",
+            "item": "祛痘"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c20420/",
+            "item": "纹身"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c20418/",
+            "item": "化妆品"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiankangliren/c21394/",
+            "item": "养发"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/jiehun/",
+                "item": "结婚"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/jiehun/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20198/",
+            "item": "婚纱摄影"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20303/",
+            "item": "旅拍"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20641/",
+            "item": "个性写真"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20210/",
+            "item": "婚宴"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20201/",
+            "item": "婚庆公司"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20199/",
+            "item": "婚纱礼服"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20200/",
+            "item": "西服定制"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20202/",
+            "item": "婚戒首饰"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20204/",
+            "item": "婚车租赁"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20206/",
+            "item": "司仪主持"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20205/",
+            "item": "彩妆造型"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20207/",
+            "item": "婚礼跟拍"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20203/",
+            "item": "婚礼小礼品"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiehun/c20208/",
+            "item": "更多婚礼服务"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c20108/",
+                "item": "儿童乐园"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c20108/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20514/",
+            "item": "婴儿游泳"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20782/",
+            "item": "其它亲子游乐"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c20045/",
+                "item": "幼儿教育"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c20045/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20865/",
+            "item": "早教中心"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20787/",
+            "item": "少儿英语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20789/",
+            "item": "智力开发"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20790/",
+            "item": "托班/幼儿园"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20864/",
+            "item": "幼儿教育"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20791/",
+            "item": "其他幼儿教育"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c398/",
+                "item": "亲子摄影"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c398/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20048/",
+            "item": "儿童摄影"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20515/",
+            "item": "孕妇写真"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20783/",
+            "item": "上门拍"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20784/",
+            "item": "其他亲子摄影"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c20042/",
+                "item": "孕产护理"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/qinzi/c20042/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20516/",
+            "item": "月子会所"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20792/",
+            "item": "产后恢复"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20793/",
+            "item": "妇幼医院"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20794/",
+            "item": "孕产用品"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20795/",
+            "item": "开奶催乳"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20796/",
+            "item": "月嫂"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20170/",
+            "item": "亲子购物"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20785/",
+            "item": "宝宝派对"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/qinzi/c20171/",
+            "item": "亲子服务"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/yundongjianshen/",
+                "item": "运动健身"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/yundongjianshen/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20253/",
+            "item": "健身中心"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20266/",
+            "item": "武术场馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20256/",
+            "item": "游泳馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20257/",
+            "item": "羽毛球馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20268/",
+            "item": "溜冰场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20270/",
+            "item": "射箭馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20258/",
+            "item": "篮球场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20259/",
+            "item": "网球馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20262/",
+            "item": "台球馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20265/",
+            "item": "乒乓球"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20264/",
+            "item": "足球场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20260/",
+            "item": "高尔夫场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20261/",
+            "item": "保龄球馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20263/",
+            "item": "体育场馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20267/",
+            "item": "马术场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20269/",
+            "item": "壁球馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yundongjianshen/c20271/",
+            "item": "更多运动"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20180/",
+                "item": "装修设计"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20180/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20878/",
+            "item": "半包装修"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20879/",
+            "item": "全包装修"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20880/",
+            "item": "清包装修"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20182/",
+                "item": "装修建材"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20182/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20829/",
+            "item": "地板"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20823/",
+            "item": "瓷砖石材"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20825/",
+            "item": "橱柜"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20835/",
+            "item": "灯饰照明"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20826/",
+            "item": "厨卫洁具"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20822/",
+            "item": "油漆涂料"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20827/",
+            "item": "集成吊顶"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20824/",
+            "item": "墙纸墙艺"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20832/",
+            "item": "门窗"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20831/",
+            "item": "木材板材"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20828/",
+            "item": "家用五金"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20834/",
+            "item": "电工电料"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20830/",
+            "item": "楼梯"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20833/",
+            "item": "管材管件"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20771/",
+                "item": "家具家居"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20771/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20838/",
+            "item": "家具"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20840/",
+            "item": "床上用品/家纺"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20841/",
+            "item": "家居饰品"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20839/",
+            "item": "厨具餐具"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20843/",
+            "item": "智能家居"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20184/",
+                "item": "家装卖场"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20184/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20847/",
+            "item": "建材卖场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20846/",
+            "item": "家居卖场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/jiazhuang/c20845/",
+            "item": "灯饰卖场"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20287/",
+                "item": "音乐培训"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20287/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20313/",
+            "item": "钢琴"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20314/",
+            "item": "吉他"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20315/",
+            "item": "小提琴"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20316/",
+            "item": "古筝"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20317/",
+            "item": "架子鼓"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20318/",
+            "item": "声乐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20319/",
+            "item": "其他音乐培训"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20291/",
+                "item": "职业技术"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20291/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20323/",
+            "item": "美容化妆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20324/",
+            "item": "会计"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20325/",
+            "item": "IT"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20326/",
+            "item": "厨艺"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20622/",
+            "item": "管理培训"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20623/",
+            "item": "摄影培训"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20624/",
+            "item": "司法考试"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20637/",
+            "item": "公务员培训"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20327/",
+            "item": "其他职业培训"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20286/",
+                "item": "外语培训"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20286/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20306/",
+            "item": "英语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20307/",
+            "item": "日语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20308/",
+            "item": "韩语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20309/",
+            "item": "法语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20310/",
+            "item": "德语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20311/",
+            "item": "汉语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20620/",
+            "item": "俄语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20621/",
+            "item": "西班牙语"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20312/",
+            "item": "其他外语"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20288/",
+                "item": "美术培训"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20288/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20320/",
+            "item": "绘画"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20321/",
+            "item": "书法"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xuexipeixun/c20322/",
+            "item": "其他美术"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/yiliao/",
+                "item": "医疗健康"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/yiliao/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/yiliao/c20275/",
+            "item": "医院"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yiliao/c20276/",
+            "item": "齿科口腔"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yiliao/c20277/",
+            "item": "体检中心"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yiliao/c20278/",
+            "item": "药店"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yiliao/c20279/",
+            "item": "中医"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/yiliao/c20280/",
+            "item": "其他健康服务"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/aiche/",
+                "item": "爱车"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/aiche/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20115/",
+            "item": "洗车"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20116/",
+            "item": "租车"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20117/",
+            "item": "加油站"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20118/",
+            "item": "维修保养"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20119/",
+            "item": "驾校"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20120/",
+            "item": "汽车美容"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20121/",
+            "item": "陪练"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20135/",
+            "item": "汽车用品"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20161/",
+            "item": "停车场"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20162/",
+            "item": "汽车保险"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20163/",
+            "item": "4S店/汽车销售"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20164/",
+            "item": "更多汽车服务"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20174/",
+            "item": "机油保养"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20212/",
+            "item": "汽车报价"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20215/",
+            "item": "二手车"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20237/",
+            "item": "广告驾校"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20381/",
+            "item": "交警队"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20767/",
+            "item": "汽车改装"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/aiche/c20768/",
+            "item": "汽车配件"
+        }]
+    }, {
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/chongwu/c20691/",
+                "item": "宠物"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/chongwu/c20691/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/chongwu/c25147/",
+            "item": "宠物店"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/chongwu/c25148/",
+            "item": "宠物医院"
+        }]
+    }],
+    [{
+        "titles": {
+            "title": {
+                "href": "https://dachangzizhixian.meituan.com/xiuxianyule/",
+                "item": "玩乐"
+            },
+            "more": {
+                "href": "https://dachangzizhixian.meituan.com/xiuxianyule/",
+                "item": "更多"
+            }
+        },
+        "content": [{
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c10/",
+            "item": "KTV"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c234/",
+            "item": "酒吧"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c230/",
+            "item": "密室逃脱"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c38/",
+            "item": "游乐游艺"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20770/",
+            "item": "网吧网咖"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20104/",
+            "item": "私人影院"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c218/",
+            "item": "DIY手工坊"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20777/",
+            "item": "桌面游戏"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c516/",
+            "item": "采摘/农家乐"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20776/",
+            "item": "棋牌室"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20773/",
+            "item": "轰趴馆"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c219/",
+            "item": "真人CS"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c20779/",
+            "item": "VR"
+        }, {
+            "href": "https://dachangzizhixian.meituan.com/xiuxianyule/c26/",
+            "item": "其他玩乐"
+        }]
+    }]
+]

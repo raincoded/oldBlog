@@ -151,11 +151,11 @@ export default {
         if (this.comment.mainId) {
           // 是不是次评论
           comment.mainId = this.comment.mainId;
+          comment.secondId = this.comment.id;
+        } else {
+          comment.mainId = this.comment.id; // 不是就用评论的id作为主评论
         }
-        comment.mainId = this.comment.id; // 不是就用评论的id作为主评论
       }
-      this.comment && (comment.secondId = this.comment.secondId);
-
       // console.log("--------------------------");
       // 不能存在时，需要提供cookie
       // if (this.name && this.email) {}
