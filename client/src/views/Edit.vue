@@ -12,7 +12,7 @@
           placeholder="标题"
           aria-label="title"
           aria-describedby="basic-addon1"
-          v-model="article"
+          v-model="title"
         />
       </div>
     </div>
@@ -67,28 +67,108 @@
 import ajaxIndex from "@/ajax/index.js";
 import ajaxStatic from "@/ajax/static.js";
 import xss from "xss";
+import xssUtil from "@/until/xssUntil.js";
 export default {
   data() {
     return {
-      article: "",
-      tags: [1, 2, 4],
+      tags: [],
       curTag: "",
+      title: "",
     };
   },
   methods: {
     submitHtml() {
-      console.log(this.editor2.txt.html());
+      //  console.log();
+      let str = this.editor2.txt.html();
+      // console.log(str);
+      str = xssUtil.unhtmlForUrl(str);
+      if (str.length == 0) return;
+      const article = {
+        title: this.title,
+        tag: this.tags.join(","),
+        content: str,
+      };
+      // console.log(article);
+      ajaxIndex
+        .postArticle(article)
+        .then((req) => {
+          if (req.code == 0) {
+            alert("上传成功");
+            this.tags = [];
+            this.title = [];
+            this.editor2.txt.html('')
+            
+            this.$router.push({ name: "Index" });
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+
+      // str = this.html(str)
+      // console.log(str);
+      // console.log(
+      //   xss(this.editor2.txt.html(), {
+      //     whiteList: {
+      //       div: ["style", "height", "width"],
+      //       span: ["style", "height", "width"],
+      //       p: ["style", "height", "width"],
+      //       a: ["src", "alt", "height", "width"],
+      //       img: ["src", "alt", "style"],
+      //       br: ["style", "height", "width"],
+      //       hr: ["style", "height", "width"],
+      //       table: ["style", "height", "width"],
+      //       tbody: ["style", "height", "width"],
+      //       tr: ["style", "height", "width", "height", "width"],
+      //       td: ["style", "height", "width"],
+      //       col: ["style", "height", "width"],
+      //       colgroup: ["style", "height", "width"],
+      //       code: ["style", "height", "width"],
+      //       pre: ["style", "height", "width"],
+      //     },
+      //   })
+      // );
     },
     deleteTag(index) {
       this.tags.splice(index, 1);
     },
     pushTag() {
-      this.tags.push(this.curTag);
+      this.tags.push(xss(this.curTag));
+      this.curTag = "";
+    },
+    unhtmlForUrl(str, reg) {
+      return str
+        ? str.replace(reg || /[<">']/g, function (a) {
+            return {
+              "<": "&lt;",
+              "&": "&amp;",
+              '"': "&quot;",
+              ">": "&gt;",
+              "'": "&#39;",
+            }[a];
+          })
+        : "";
+    },
+    html: function (str) {
+      return str
+        ? str.replace(/&((g|l|quo)t|amp|#39|nbsp);/g, function (m) {
+            return {
+              "&lt;": "<",
+              "&amp;": "&",
+              "&quot;": '"',
+              "&gt;": ">",
+              "&#39;": "'",
+              "&nbsp;": " ",
+            }[m];
+          })
+        : "";
     },
   },
   mounted() {
     // console.log(this.eleId);
     this.editor2 = new wangEditor(`#editor`);
+    this.editor2.customConfig.pasteFilterStyle = false;
+    // this.editor2.customConfig.pasteIgnoreImg = true;
     this.editor2.customConfig.zIndex = 0;
     // 隐藏“网络图片”tab
     this.editor2.customConfig.showLinkImg = false;
@@ -97,17 +177,16 @@ export default {
     // 限制一次最多上传 1 张图片
     this.editor2.customConfig.uploadImgMaxLength = 1;
     this.editor2.customConfig.debug = true;
-
     this.editor2.customConfig.customUploadImg = (files, insert) => {
       // files 是 input 中选中的文件列表
       // insert 是获取图片 url 后，插入到编辑器的方法
       const formData = new FormData();
       formData.append("img", files[0]);
       ajaxStatic.uploadImg(formData).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.code === 0) {
           // 上传代码返回结果之后，将图片插入到编辑器中
-          console.log("路径", res.data);
+          // console.log("路径", res.data);
           insert(res.data);
         }
       });
@@ -132,15 +211,65 @@ export default {
     ];
     this.editor2.create();
   },
-  watch:{
-    article(newValue,oldValue){
-      return xss(newValue)
+  watch: {
+    article(newValue, oldValue) {
+      return xss(newValue);
     },
-    curTag(newValue,oldValue){
-      return xss(newValue)
+    curTag(newValue, oldValue) {
+      return xss(newValue);
     },
-  }
+  },
 };
+
+// var xssUtil = {
+//     /**
+//      * 将url中的html字符转义， 仅转义  ', ", <, > 四个字符
+//      * @param  { String } str 需要转义的字符串
+//      * @param  { RegExp } reg 自定义的正则
+//      * @return { String }     转义后的字符串
+//      */
+//     unhtmlForUrl: function (str, reg) {
+//         return str ? str.replace(reg || /[<">']/g, function (a) {
+//             return {
+//                 '<': '&lt;',
+//                 '&': '&amp;',
+//                 '"': '&quot;',
+//                 '>': '&gt;',
+//                 "'": '&#39;'
+//             }[a]
+
+//         }) : '';
+//     },
+//     /**
+//      * 将str中的转义字符还原成html字符
+//      * @see UE.utils.unhtml(String);
+//      * @method html
+//      * @param { String } str 需要逆转义的字符串
+//      * @return { String } 逆转义后的字符串
+//      * @example
+//      * ```javascript
+//      *
+//      * var str = '&lt;body&gt;&amp;&lt;/body&gt;';
+//      *
+//      * //output: <body>&</body>
+//      * console.log( UE.utils.html( str ) );
+//      *
+//      * ```
+//      */
+//     html: function (str) {
+//         return str ? str.replace(/&((g|l|quo)t|amp|#39|nbsp);/g, function (m) {
+//             return {
+//                 '&lt;': '<',
+//                 '&amp;': '&',
+//                 '&quot;': '"',
+//                 '&gt;': '>',
+//                 '&#39;': "'",
+//                 '&nbsp;': ' '
+//             }[m]
+//         }) : '';
+//     },
+// }
 </script>
 <style lang="scss" scoped>
 </style>
+

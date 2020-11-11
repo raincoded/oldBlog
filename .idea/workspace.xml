@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="756ed15e-1275-4d83-8f54-89a3ae93b595" name="默认更改列表" comment="">
+      <change beforePath="$PROJECT_DIR$/client/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/ajax/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/ajax/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ComSeconde.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ComSeconde.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Comment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Comment.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/index/Pager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/index/Pager.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/About.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Content.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Edit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Message.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Message.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/models/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/models/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/routes/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/routes/admin/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/routes/admin/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/routes/admin/article.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/routes/admin/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/routes/admin/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/routes/admin/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/routes/admin/message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/routes/admin/tag.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/routes/admin/tag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/project/blog/services/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/project/blog/services/UserService.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1k6AMHmsOItJOlZjWj85fo4IoiY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="756ed15e-1275-4d83-8f54-89a3ae93b595" name="默认更改列表" comment="" />
+      <created>1605010621572</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605010621572</updated>
+      <workItem from="1605010624763" duration="287000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

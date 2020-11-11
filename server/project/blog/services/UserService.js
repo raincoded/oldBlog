@@ -205,14 +205,13 @@ exports.getUserByPage = async function ({ params, isAdmin }) {
         }
         where.power = power;
     }
-
     // id && (where.id = id);
     // power && (where.power = power);
     // email && (where.email = email);
     // name && (where.name = { [Op.like]: `%${name}%` });
     const result = await Users.findAndCountAll({
         attributes: {
-            exclude: isAdmin ? ['password', 'power'] : ['password', 'power', 'updatedAt', 'createdAt', 'deletedAt']
+            exclude: isAdmin ? ['power'] : ['password', 'power', 'updatedAt', 'createdAt', 'deletedAt']
         },
         where,
         offset: (page - 1) * limit,

@@ -12,6 +12,9 @@ export default new Vuex.Store({
     emoji: [], // Emoji表情
     user: null,
     newMessages: null,
+    articles: [],
+    curPage: 1,
+    limit: 6,
   },
   mutations: {
     changeStateId(state, payload) {
@@ -26,6 +29,16 @@ export default new Vuex.Store({
     newMessagesChange(state, payload) {
       state.newMessages = payload;
     },
+    articlesChange(state, payload) {
+      payload && (state.articles = payload);
+    },
+    pageChange(state, payload) {
+      payload && (state.curPage = payload);
+    },
+    limitChange(state, payload) {
+      payload && (state.limit = payload);
+    },
+
   },
   actions: {
     emojiGet({ commit, state }, payload) {
@@ -38,10 +51,10 @@ export default new Vuex.Store({
         .login()
         .then((req) => {
           if (req.code == 0) {
-            console.log("当前用户", req.data);
+            // console.log("当前用户", req.data);
             context.commit("userChange", req.data);
           } else if (req.code == 500) {
-            console.log("未登录");
+            // console.log("未登录");
             context.commit("userChange", null);
           }
         })
@@ -57,10 +70,20 @@ export default new Vuex.Store({
         orderProp: "createdAt",
         order: "DESC",
       }).then((req) => {
-        console.log('最新的', req.data);
+        // console.log('最新的', req.data);
         commit('newMessagesChange', req.data)
       });
     },
+    getArticles({ commit, state }) {
+      indexAjax.getArticlePage({
+        page: state.curPage,
+        limit: state.limit
+      }).then(req => {
+        commit('articlesChange',req.data)
+      }).catch(err => {
+        // console.log(err);
+      })
+    }
   },
   modules: {
     comment,

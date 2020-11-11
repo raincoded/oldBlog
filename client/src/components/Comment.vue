@@ -1,7 +1,7 @@
 <template>
   <!-- 单独评论评论列表 -->
   <div class="row p-1">
-    <div class="col-1 px-0">
+    <div class="col-1 px-0 d-none d-sm-block">
       <avatar class="commentAvatar" />
     </div>
     <div class="col-11 py-2">
@@ -34,6 +34,12 @@
             />
           </svg>
         </i>
+        <span
+          class="initialism cursor"
+          v-if="$store.state.user"
+          @click="deleteCom(comment)"
+          >删除</span
+        >
       </div>
     </div>
     <com-input
@@ -46,6 +52,7 @@
 <script>
 import Avatar from "@/components/Avatar.vue";
 import ComInput from "@/components/ComInput.vue";
+import indexAjax from "@/ajax/index.js";
 export default {
   props: ["comment", "hiddlen", "mainId", "curCom"],
   components: {
@@ -60,14 +67,23 @@ export default {
   methods: {
     changeShow() {
       if (this.comment.id == this.$store.state.comment.curCom) {
-        this.$store.commit('curComChange',null)
+        this.$store.commit("curComChange", null);
       } else {
-          this.$store.commit('curComChange',this.comment.id)
+        this.$store.commit("curComChange", this.comment.id);
       }
     },
+    deleteCom(comment) {
+      indexAjax
+        .deleteComment(comment.id)
+        .then(() => {
+          this.$store.dispatch("comsGet");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
   },
-  watch: {
-  },
+  watch: {},
 };
 </script>
 <style lang="scss" >

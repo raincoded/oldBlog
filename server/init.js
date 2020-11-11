@@ -10,6 +10,11 @@ const staticRoot = path.resolve(runPath, "./server/public");
 
 // 页面重定向
 const history = require('connect-history-api-fallback');
+
+// 处理静态资源
+app.use(/\/blog$/, express.static(path.join(staticRoot, 'blog')));
+app.use(/\/meituan$/, express.static(path.join(staticRoot, 'meituan')));
+
 // 需进行一下配置，要不然会拦截掉所有get请求
 app.use('/blog', history({
     rewrites: [

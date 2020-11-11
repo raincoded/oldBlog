@@ -7,20 +7,19 @@
       <!-- 内容区 -->
       <div class="container">
         <div class="row mx-0 py-3">
-          <div class="col-8 pl-0">
+          <div class="col-12 col-lg-8 px-0 pr-lg-3">
             <keep-alive>
               <router-view />
             </keep-alive>
           </div>
-          <div class="col-4">
+          <div class="col-0 col-lg-4 d-none d-lg-block">
             <right-contain />
           </div>
         </div>
       </div>
       <!-- footer -->
       <footer class="text-white">
-        鲁公网安备 12345678901234号 鲁ICP备12345678号 Powered By:Z-Blog Theme
-        By:优美主题 丨免责声明
+        鲁公网安备 12345678901234号 鲁ICP备12345678号 丨免责声明
       </footer>
     </div>
   </div>
@@ -58,10 +57,10 @@ export default {
       .login()
       .then((req) => {
         if (req.code == 0) {
-          console.log("当前用户", req.data);
+          // console.log("当前用户", req.data);
           this.$store.commit("userChange", req.data);
         } else if (req.code == 500) {
-          console.log("未登录");
+          // console.log("未登录");
           this.$store.commit("userChange", null);
         }
       })

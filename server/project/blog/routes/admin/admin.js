@@ -3,15 +3,18 @@ const router = express.Router();
 // 服务层server
 const Service = require('../../services/init');
 
-const baseUrl = '/admin/user';
+const baseUrl = '/admin/admin';
 
 const runPath = process.cwd()// 获取当前的运行路径
 const path = require('path');
 const getMsg = require(path.resolve(runPath, './server/until/getSendResult')); // 辅助函数
 
+const md5 = require('md5');
+const crypt = require(path.resolve(runPath, './server/until/crypt'))
+
 // 分页获取所有用户
 router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.UserService.getUserByPage({
         params: req.query,
         isAdmin: true
@@ -30,7 +33,7 @@ router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
 
 // 获取所有用户
 router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.UserService.getUserAll();
     if (result.count > 0) {
         return {
@@ -49,7 +52,7 @@ router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
  *  @param {'int'} id 目标id
  */
 router.get(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.UserService.getUserById({
         id: req.params.id,
         isAdmin: true
@@ -70,7 +73,7 @@ router.get(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
  *  @param {'int'} power 要修改的权限
  */
 router.put(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     let { id, power, identity } = req.body;
     id = +id;
     identity = +identity;
@@ -120,7 +123,7 @@ router.put(baseUrl, getMsg.asyncHandler(async (req, res) => {
 
 // 根据id删除用户
 router.delete(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const data = await Service.UserService.deleteUser(id);
     if (data) {
         return '删除成功'
@@ -135,7 +138,7 @@ router.post(baseUrl + '/login', getMsg.asyncHandler(async (req, res) => {
     if (req.userId) {
         const result = await Service.UserService.getUserById({
             id: req.userId,
-            isAdmin: false
+            isAdmin: false,
         });
         if (result) {
             return {
@@ -166,7 +169,7 @@ router.post(baseUrl + '/login', getMsg.asyncHandler(async (req, res) => {
         throw new Error('密码长度不能小于6位！')
     }
     password = md5(password);
-    const queryResult = await Service.UserService.getUserByPage({ email });
+    const queryResult = await Service.UserService.getUserByPage({ params: { email }, isAdmin: true });
     if (queryResult.count > 0) {
         if (queryResult.rows[0].password == password) {
             let token = crypt.encrypt(queryResult.rows[0].id.toString()); // 对id进行加密
@@ -194,7 +197,7 @@ router.post(baseUrl + '/login', getMsg.asyncHandler(async (req, res) => {
 // 退出登录
 router.post(baseUrl + '/cancle', getMsg.asyncHandler(async (req, res) => {
     console.log('取消登录', req.userId);
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     res.cookie('token', '', {
         maxAge: new Date(-1000),
         httpOne: true,

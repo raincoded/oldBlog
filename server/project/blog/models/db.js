@@ -5,9 +5,13 @@ const sequelize = new Sequelize('blog','root','mysql',{
     dialect:'mysql',
     logging:null
 })
+// 链接数据库
+// const {Sequelize} = require('sequelize');
 // const sequelize = new Sequelize('blog','mymysql','2GEmysql',{
-//     host:'121.196.176.42',
+//     host:'rm-bp1g9emtmt2e17cg45o.mysql.rds.aliyuncs.com',
 //     dialect:'mysql',
 //     logging:null
 // })
 module.exports = sequelize
+module.exports = sequelize
+

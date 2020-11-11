@@ -18,7 +18,7 @@
           >
         </h4>
         <!-- 文章正文 -->
-        <p class="mb-0 w-100 ariticle-content">{{ article.content }}</p>
+        <p class="mb-0 w-100 ariticle-content" v-html='content'></p>
       </div>
       <!-- 文章辅助信息 -->
       <div class="w-100 bg-dark text-white font-weight-light pl-3 py-1">
@@ -43,6 +43,8 @@
   </div>
 </template>
 <script>
+import xssUntil from '@/until/xssUntil.js'
+console.log(xssUntil);
 export default {
   props: ["article"],
   data() {
@@ -77,6 +79,9 @@ export default {
       }
       return [];
     },
+    content(){
+      return xssUntil.html(this.article.content)
+    }
   },
 };
 </script>

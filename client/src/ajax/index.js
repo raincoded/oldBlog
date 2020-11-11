@@ -19,16 +19,22 @@ export default {
     getArticleById(id) {
         return axios.get(`/blog/api/article/${id}`)
     },
-    /**
-     * 根据用户id获取文章
-     * @param {*} params  object
-     * @param {*} userId  
-     */
-    getArticleByUser(params) {
-        return axios.get("/blog/api/article", {
-            params
+    // 发布文章
+    postArticle(params){
+        return axios.post('/blog/admin/article',{
+            data: params
         })
     },
+    // /**
+    //  * 根据用户id获取文章
+    //  * @param {*} params  object
+    //  * @param {*} userId  
+    //  */
+    // getArticleByUser(params) {
+    //     return axios.get("/blog/api/article", {
+    //         params
+    //     })
+    // },
     // 获取文章，阅读，评论数量
     getArticleMes() {
         return axios.get('/blog/api/other/article')
@@ -57,9 +63,12 @@ export default {
             data: params
         })
     },
+    deleteComment(id) {
+        return axios.delete('/blog/admin/comment/' + id)
+    },
     // 登录
     login(params) {
-        return axios.post('/blog/admin/user/login', {
+        return axios.post('/blog/admin/admin/login', {
             data: params
         })
     },
@@ -82,13 +91,16 @@ export default {
         })
     },
     // 分页获取留言
-    getMessageByPage(params){
-        return axios.get('/blog/api/message',{
+    getMessageByPage(params) {
+        return axios.get('/blog/api/message', {
             params
         })
     },
+    deleteMessage(id){
+        return axios.delete('/blog/admin/message/' + id)
+    },
     // 取消登录
-    cancleLogin(){
+    cancleLogin() {
         return axios.post('/blog/admin/user/cancle')
     }
 }

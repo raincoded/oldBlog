@@ -17,7 +17,7 @@ const getMsg = require(path.resolve(runPath, './server/until/getSendResult')); /
  * @param {*} tag 标签
  */
 router.post(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.TagService.addTags({
         params: req.body,
         isAdmin: true
@@ -47,7 +47,7 @@ router.post(baseUrl, getMsg.asyncHandler(async (req, res) => {
  * @param {int} distinct 表示是否获取不重复的标签
  */
 router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.TagService.getTagsByPage({
         params: req.query,
         isAdmin: false
@@ -69,7 +69,7 @@ router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
 
 // 获取所有标签
 router.get(baseUrl + '/all', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.TagService.getTagsAll();
     if (result) {
         return {
@@ -90,7 +90,7 @@ router.get(baseUrl + '/all', getMsg.asyncHandler(async (req, res) => {
  * @param {int} id 标签id
  */
 router.delete(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const articleTag = await Service.TagService.getTagsById({ id: req.params.id });// 查询当前的标签对应的文章id
     const result = await Service.TagService.deleteTag(req.params.id);
     if (result) {

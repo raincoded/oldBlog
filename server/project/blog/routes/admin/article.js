@@ -11,7 +11,7 @@ const getMsg = require(path.resolve(runPath, './server/until/getSendResult')); /
 
 // 分页获取所有文章
 router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.ArticleService.getArticleByPage({
         params: req.query,
         isAdmin: true
@@ -27,7 +27,7 @@ router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
 
 // 获取所有文章
 router.get(baseUrl+'/all', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.ArticleService.getArticleAll();
     if (result) {
         return {
@@ -40,10 +40,11 @@ router.get(baseUrl+'/all', getMsg.asyncHandler(async (req, res) => {
 
 // 上传文章
 router.post(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.ArticleService.addArticle({
-        params: req.body,
-        isAdmin: true
+        params: req.body.data,
+        isAdmin: true,
+        userId: req.userId
     })
     if (result) {
         return {
@@ -60,7 +61,7 @@ router.post(baseUrl, getMsg.asyncHandler(async (req, res) => {
  * @param {'int'} identity 你的id
  */
 router.delete(baseUrl+'/:id', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.ArticleService.deleteArticle(req.params.id);
     if (result) {
         return {

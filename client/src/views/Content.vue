@@ -1,15 +1,19 @@
 <template>
   <!-- 文章正文详情 -->
-  <div class="row mr-2" v-if="article && user">
+  <div class="row mx-0" v-if="article && user">
     <!-- 文章头部 -->
-    <div class="col-12 bg-dark text-white pt-2">
-      <h4>{{ article.title }}</h4>
-      <p>
-        <span class="mr-2 initialism">作者 ：{{ user.name }}</span>
-        <span class="mx-2 initialism"
-          >发布日期 ：{{ new Date(article.createdAt).toLocaleString() }}</span
-        >
-        <span class="mx-2 initialism">浏览量 ：( {{ views }} )</span>
+    <div class="col-12 bg-dark text-white py-2">
+      <h4 class="h4">{{ article.title }}</h4>
+      <div>
+        <div>
+          <span class="mr-2 initialism">作者 ：{{ user.name }}</span>
+          <span class="initialism">浏览量 ：( {{ views }} )</span>
+        </div>
+        <div>
+          <span class="initialism"
+            >发布日期 ：{{ new Date(article.createdAt).toLocaleString() }}</span
+          >
+        </div>
         <!-- <span class="mx-2 initialism">
           <i :class="{ isGooded: isGood }" @click="isGood = !isGood">
             <svg
@@ -28,10 +32,10 @@
           </i>
           ：( {{ praise.count }} )
         </span> -->
-      </p>
+      </div>
     </div>
     <!-- 文章正文 -->
-    <div class="col-12 py-2 bg-white">{{ article.content }}</div>
+    <div class="col-12 py-2 bg-white" v-html="content"></div>
     <!-- 发表评论 -->
     <div class="col-12 bg-white mt-3 p-3">
       <!-- 最上方单独的评论 -->
@@ -47,6 +51,7 @@
 import ComInput from "@/components/ComInput.vue";
 import CommentList from "@/components/CommentList.vue";
 import indexAjax from "@/ajax/index.js";
+import xssUntil from '@/until/xssUntil.js'
 export default {
   data() {
     return {
@@ -78,7 +83,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.state.articleId);
+    // console.log(this.$store.state.articleId);
     this.$store.commit("curComChange", null);
   },
   computed: {
@@ -92,6 +97,9 @@ export default {
       }
       return 0;
     },
+    content(){
+      return xssUntil.html(this.article.content)
+    }
   },
   watch: {
     "$route.params": {

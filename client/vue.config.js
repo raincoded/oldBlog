@@ -8,10 +8,10 @@ module.exports = {
         $: "jquery",
         jQuery: "jquery",
         "windows.jQuery": "jquery"
-      })
+      }),
     ]
   },
-  publicPath: process.env.NODE_ENV === 'production' &&  '/blog',
+  publicPath: process.env.NODE_ENV === 'production' ? '/blog' : '/',
   devServer: {
     proxy: {
       '/blog': {

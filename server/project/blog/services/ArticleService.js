@@ -5,18 +5,16 @@ const validate = require('validate.js'); // 数据验证
 const pick = require('./../until/pick');//过滤对象属性
 const unique = require('./../until/unique');// 数组去重字符串
 const xss = require('xss');
+const runPath = process.cwd()// 获取当前的运行路径
+const path = require('path');
+const xssUntil = require(path.resolve(runPath, 'server/until/xssUntil.js'))
 /**
  * 发布文章
  * @param {'Object'} obj 
  */
-exports.addArticle = async function ({ params, isAdmin }) {
-    const newObj = pick(params, 'title', 'content', 'userId', 'tag');// 过滤需要的值
-    newObj.userId = +newObj.userId;
+exports.addArticle = async function ({ params, isAdmin ,userId}) {
+    const newObj = pick(params, 'title', 'content', 'tag');// 过滤需要的值
     const testResult = validate(newObj, {
-        userId: {
-            presence: true,
-            type: "integer"
-        },
         title: {
             presence: {
                 allowEmpty: false, // 不允许为{},[],""," "
@@ -36,13 +34,17 @@ exports.addArticle = async function ({ params, isAdmin }) {
     if (testResult) {// 同步代码我们需手动抛出错误，异步会直接抛出
         throw testResult
     }
+    newObj.userId = userId;
     newObj.views = 0;
     newObj.title = xss(newObj.title);
-    newObj.content = xss(newObj.content);
+    newObj.content = xssUntil.unhtmlForUrl(newObj.content);
     let tagStr = null;
+    console.log( 'tag数组开始',newObj.tag );
     if (newObj.tag) {
         newObj.tag = xss(newObj.tag);
+        console.log( 'tag数组前',newObj.tag );
         newObj.tag = newObj.tag.split(','); // 分割成数组
+        console.log( 'tag数组后',newObj.tag );
         newObj.tag = unique(newObj.tag);// 去重
         (newObj.tag.length > 3) && (newObj.tag = newObj.tag.slice(0, 3));// 最多只能有3个标签
         tagStr = newObj.tag;

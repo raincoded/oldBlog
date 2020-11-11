@@ -19,7 +19,7 @@ const getMsg = require(path.resolve(runPath, './server/until/getSendResult')); /
  * @param {*} author int
  */
 router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.CommentService.getCommentByPage({
         params: req.query,
         isAdmin: true
@@ -40,7 +40,7 @@ router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
  * 根据文章id获取评论
  */
 router.get(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.CommentService.getCommentByArticleId({
         id: req.params.id,
         isAdmin: true
@@ -59,7 +59,7 @@ router.get(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
 
 // 获取所有评论
 router.get(baseUrl + '/all', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.CommentService.getCommentAll();
     if (result) {
         return {
@@ -85,7 +85,7 @@ router.get(baseUrl + '/all', getMsg.asyncHandler(async (req, res) => {
 router.post(baseUrl, getMsg.asyncHandler(async (req, res) => {
     // console.log('请求这IP地址',req.ip);
     // console.log('请求这IP地址',req.connection.remoteAddress);
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.CommentService.addComment({
         params:req.body.data,
         isAdmin:true
@@ -107,7 +107,8 @@ router.post(baseUrl, getMsg.asyncHandler(async (req, res) => {
  * @param {'int'} identity 你的身份
  */
 router.delete(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
-    if (req.userId) throw new Error('你不是管理员!')
+    console.log(req.userId);
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.CommentService.deleteComment(req.params.id);
     if (result) {
         return {

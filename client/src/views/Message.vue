@@ -21,6 +21,12 @@
           <span class="text-black-50 initialism ml-3">{{
             new Date(message.createdAt).toLocaleString()
           }}</span>
+          <span
+            class="initialism cursor ml-2"
+            v-if="$store.state.user"
+            @click="deleteMess(message)"
+            >删除</span
+          >
           <p v-html="message.content" :class="{ 'mb-0': !message.reply }"></p>
         </div>
         <div class="col-12" v-if="message.reply">
@@ -69,6 +75,19 @@ export default {
         page: this.curPage,
         limit: this.limit,
       });
+    },
+    deleteMess(message) {
+      ajaxIndex
+        .deleteMessage(message.id)
+        .then(() => {
+          this.$store.dispatch("messagesGet",{
+            limit:this.limit,
+            page:this.curPage
+          });
+        })
+        .catch((err) => {
+          alert(err);
+        });
     },
   },
   watch: {

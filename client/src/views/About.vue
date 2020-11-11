@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-0">
+  <div class="row mx-0">
     <div class="col-12 bg-white my-2 shadow">
       <h3 class="border-bottom py-3 border-dark h4">关于我</h3>
       <dl class="mb-1">
@@ -44,6 +44,14 @@
       <p>包管理工具：<strong>yarn</strong></p>
       <p>仓库：<strong>git</strong></p>
       <p class="p-2 alert-primary">博客中依然有很多不足，待后续继续修正</p>
+    </div>
+    <div class="col-12 bg-white my-2 shadow">
+      <h3 class="border-bottom py-3 border-dark h4">其他作品</h3>
+      <p>以下是博主的一些其他项目链接</p>
+      <p>
+        <a href="/starbucks" data-toggle="tooltip" data-placement="top" title="前往" class="mr-3 text-success">星巴克官网首页</a>
+        <a href="snakes" data-toggle="tooltip" data-placement="top" title="前往" class="mr-3 text-success">贪吃蛇小游戏</a>
+      </p>
     </div>
     <div class="col-12 bg-white my-2 shadow">
       <h3 class="border-bottom py-3 border-dark h4">友情链接</h3>

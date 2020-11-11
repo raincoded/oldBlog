@@ -1,7 +1,11 @@
 <template>
   <!-- 循环次要评论 -->
   <div class="ml-3">
-    <div class="col-12 cursor decoration modal-dialog-centered" @click="show = !show" v-show="!show">
+    <div
+      class="col-12 cursor decoration modal-dialog-centered"
+      @click="show = !show"
+      v-show="!show"
+    >
       展示{{ children.length }}条回复<svg
         width="1em"
         height="1em"
@@ -23,7 +27,11 @@
       :main-id="comment.id"
       v-show="show"
     />
-    <div class="col-12 cursor decoration  modal-dialog-centered" @click="show = !show" v-show="show">
+    <div
+      class="col-12 cursor decoration modal-dialog-centered"
+      @click="show = !show"
+      v-show="show"
+    >
       收起<svg
         width="1em"
         height="1em"
@@ -66,6 +74,22 @@ export default {
     border-bottom: none;
     margin-left: 1rem;
     margin-right: 1rem;
+  }
+}
+@media all and (max-width: 576px) {
+  .decoration {
+    &:before,
+    &:after {
+      // content: "";
+      // display: inline-block;
+      width: 2rem;
+      // border: 0.1rem solid #ccc;
+      // border-left: none;
+      // border-right: none;
+      // border-bottom: none;
+      // margin-left: 1rem;
+      // margin-right: 1rem;
+    }
   }
 }
 </style>

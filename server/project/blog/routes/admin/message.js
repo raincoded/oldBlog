@@ -14,7 +14,7 @@ const getMsg = require(path.resolve(runPath, './server/until/getSendResult')); /
 // 分页获取留言
 router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
     console.log('获取留言');
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.MessageService.getMessageByPage({
         params: req.query,
         isAdmin: true
@@ -34,7 +34,7 @@ router.get(baseUrl, getMsg.asyncHandler(async (req, res) => {
 // 回复留言
 router.put(baseUrl, getMsg.asyncHandler(async (req, res) => {
     console.log('回复留言');
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     // const userResult = await Service.UserService.getUserById(req.userId)
     // if (!userResult) {
     //     res.cookie('token', '', {
@@ -61,7 +61,7 @@ router.put(baseUrl, getMsg.asyncHandler(async (req, res) => {
 // 删除留言
 router.delete(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
     console.log('删除留言');
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     // const userResult = await Service.UserService.getUserById(req.userId)
     // if (!userResult) {
     //     res.cookie('token', '', {
@@ -84,7 +84,7 @@ router.delete(baseUrl + '/:id', getMsg.asyncHandler(async (req, res) => {
 // 获取所有留言
 router.get(baseUrl + '/all', getMsg.asyncHandler(async (req, res) => {
     console.log('获取所有留言');
-    if (req.userId) throw new Error('你不是管理员!')
+    if (!req.userId) throw new Error('你不是管理员!')
     const result = await Service.MessageService.getMessageAll();
     if (result) {
         return {

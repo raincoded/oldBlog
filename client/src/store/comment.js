@@ -3,7 +3,7 @@ function commentHandle(comment) {
     // 整理评论，将回复的整理至回复评论下
     const newCom = []; // 新的数组
     let len = comment.length;
-    console.log(comment);
+    // console.log(comment);
     for (let i = 0; i < len; i++) {
         if (!comment[i].mainId) {
             // 如果为null，表示是最高层评论，直接添加到新数组中

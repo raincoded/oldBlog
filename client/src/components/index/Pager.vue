@@ -3,14 +3,14 @@
   <nav aria-label="Page navigation example" v-if="allPage >= 2">
     <ul class="pagination justify-content-center mb-0">
       <li
-        class="page-item"
+        class="page-item  d-none d-sm-block"
         :class="{ disabled: curPage == 1 }"
         @click="changePage(1)"
       >
         <span class="page-link">首页</span>
       </li>
       <li
-        class="page-item"
+        class="page-item  d-none d-sm-block"
         :class="{ disabled: curPage == 1 }"
         @click="changePage(curPage - 1)"
       >
@@ -35,14 +35,14 @@
         <span class="page-link">...</span>
       </li>
       <li
-        class="page-item"
+        class="page-item  d-none d-sm-block"
         :class="{ disabled: curPage == allPage }"
         @click="changePage(curPage + 1)"
       >
         <span class="page-link">下一页</span>
       </li>
       <li
-        class="page-item"
+        class="page-item  d-none d-sm-block"
         :class="{ disabled: curPage == allPage }"
         @click="changePage(allPage)"
       >
